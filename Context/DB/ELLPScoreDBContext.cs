@@ -1,10 +1,12 @@
 ﻿using ELLPScore.Context.Configuration;
 using ELLPScore.Domain;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ELLPScore.Context.DB
 {
-    public class ELLPScoreDBContext : DbContext
+    public class ELLPScoreDBContext : IdentityDbContext<Professor, IdentityRole<int>, int>
     {
         public ELLPScoreDBContext(DbContextOptions<ELLPScoreDBContext> options) : base(options)
         {

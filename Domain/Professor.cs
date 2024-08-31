@@ -1,6 +1,8 @@
-﻿namespace ELLPScore.Domain
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace ELLPScore.Domain
 {
-    public class Professor
+    public class Professor : IdentityUser<int>
     {
         public int ProfessorID { get; set; }
         public string Nome { get; set; }
