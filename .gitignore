@@ -1,0 +1,96 @@
+# Visual Studio
+.vscode/
+.vs/
+*.csproj.user
+*.csproj.nuget.g.props
+*.csproj.nuget.g.targets
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Auto-generated files
+Generated\
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+
+# Packages
+*.nupkg
+*.snupkg
+*.symbols.nupkg
+*.nuget/
+.nuget/
+packages/
+bin/
+obj/
+TestResults/
+
+# Azure Pipelines
+.terraform/
+.terraform.lock.hcl
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+$RECYCLE.BIN/
+
+# VS Code directories
+.vscode/
+.vscode/settings.json
+
+# Windows file system
+*.DS_Store
+.DS_Store
+*.swp
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# JetBrains Rider
+.idea/
+
+# IIS
+/.vs/
+_ReSharper*
+*.docstates
+
+# Logs
+*.log
+Logs/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Publish outputs
+wwwroot/*
+!wwwroot/.gitkeep
+
+# NuGet dependencies
+*.nupkg
+packages/
+
+# JetBrains Rider
+.idea/
+
+# macOS
+*.DS_Store
+.DS_Store
