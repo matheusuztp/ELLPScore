@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Areas\Identity\Pages\Account\ConfirmEmailChange.cshtml" />
     <Content Remove="wwwroot\css\register.css" />
   </ItemGroup>
 
@@ -30,6 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Identity\Pages\Account\ConfirmEmailChange.cshtml" />
     <None Include="wwwroot\css\register.css" />
     <None Include="wwwroot\css\login.css" />
     <None Include="wwwroot\images\user-icon.png" />
@@ -40,6 +42,14 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\ConfirmEmailChange.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\ConfirmEmailChange.cshtml" />
   </ItemGroup>
 
 </Project>

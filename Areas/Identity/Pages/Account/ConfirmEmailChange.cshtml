@@ -1,0 +1,17 @@
+﻿@page
+@model ConfirmEmailChangeModel
+@{
+    ViewData["Title"] = "Confirmar Alteração de E-mail";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/confirm-email-change.css" />
+</head>
+
+<div class="confirm-email-change-container">
+    <div class="confirm-email-change-box">
+        <h2>Confirmação de Alteração de E-mail</h2>
+        <p>@Model.StatusMessage</p>
+        <a href="/Identity/Account/Login" class="btn btn-primary">Voltar ao Login</a>
+    </div>
+</div>

@@ -1,11 +1,14 @@
 using ELLPScore.Context.DB;
 using ELLPScore.Domain;
+using ELLPScore.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
@@ -76,7 +79,12 @@ app.Use(async (context, next) =>
     {
         "/Identity/Account/Login",
         "/Identity/Account/Register",
-        "/Identity/Account/ForgotPassword"
+        "/Identity/Account/ForgotPassword",
+        "/Identity/Account/ResetPassword", 
+        "/Identity/Account/ResetPasswordConfirmation",
+        "/Identity/Account/ForgotPasswordConfirmation",
+        "/Identity/Account/ConfirmEmail", 
+        "/Identity/Account/ConfirmEmailChange" 
     };
 
     if (!context.User.Identity.IsAuthenticated &&

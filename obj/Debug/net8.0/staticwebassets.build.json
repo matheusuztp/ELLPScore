@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Iq7025vEpdYLtaas9YwW+aLSxLiQIFaOo8iVS5d7s9Y=",
+  "Hash": "nt3KnZmnBIg5o0nfyfimtT0PVmsQVvVsvRzYfJoOR8Y=",
   "Source": "ELLPScore",
   "BasePath": "_content/ELLPScore",
   "Mode": "Default",
@@ -1195,6 +1195,25 @@
       "OriginalItemSpec": "C:\\Users\\mathe\\OneDrive\\Área de Trabalho\\ELLPScore\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ELLPScore.bundle.scp.css"
     },
     {
+      "Identity": "C:\\Users\\mathe\\OneDrive\\Área de Trabalho\\ELLPScore\\wwwroot\\css\\confirm-email-change.css",
+      "SourceId": "ELLPScore",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\mathe\\OneDrive\\Área de Trabalho\\ELLPScore\\wwwroot\\",
+      "BasePath": "_content/ELLPScore",
+      "RelativePath": "css/confirm-email-change.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\confirm-email-change.css"
+    },
+    {
       "Identity": "C:\\Users\\mathe\\OneDrive\\Área de Trabalho\\ELLPScore\\wwwroot\\css\\login.css",
       "SourceId": "ELLPScore",
       "SourceType": "Discovered",
@@ -1231,6 +1250,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\registerConfirmed.css"
+    },
+    {
+      "Identity": "C:\\Users\\mathe\\OneDrive\\Área de Trabalho\\ELLPScore\\wwwroot\\css\\reset-password.css",
+      "SourceId": "ELLPScore",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\mathe\\OneDrive\\Área de Trabalho\\ELLPScore\\wwwroot\\",
+      "BasePath": "_content/ELLPScore",
+      "RelativePath": "css/reset-password.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\reset-password.css"
     },
     {
       "Identity": "C:\\Users\\mathe\\OneDrive\\Área de Trabalho\\ELLPScore\\wwwroot\\css\\site.css",

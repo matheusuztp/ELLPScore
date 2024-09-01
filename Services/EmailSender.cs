@@ -1,29 +1,40 @@
 ﻿using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.Options;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 
-public class EmailSender : IEmailSender
+namespace ELLPScore.Services
 {
-    public Task SendEmailAsync(string email, string subject, string htmlMessage)
+    public class EmailSender : IEmailSender
     {
-        var smtpClient = new SmtpClient("smtp.your-email-provider.com")
+        private readonly EmailSettings _emailSettings;
+
+        public EmailSender(IOptions<EmailSettings> emailSettings)
         {
-            Port = 587,
-            Credentials = new NetworkCredential("your-email@example.com", "your-email-password"),
-            EnableSsl = true,
-        };
+            _emailSettings = emailSettings.Value;
+        }
 
-        var mailMessage = new MailMessage
+        public Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            From = new MailAddress("your-email@example.com"),
-            Subject = subject,
-            Body = htmlMessage,
-            IsBodyHtml = true,
-        };
+            var smtpClient = new SmtpClient(_emailSettings.SmtpServer)
+            {
+                Port = _emailSettings.SmtpPort,
+                Credentials = new NetworkCredential(_emailSettings.Username, _emailSettings.Password),
+                EnableSsl = true, // O Hotmail requer SSL
+            };
 
-        mailMessage.To.Add(email);
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress(_emailSettings.SenderEmail, _emailSettings.SenderName),
+                Subject = subject,
+                Body = htmlMessage,
+                IsBodyHtml = true,
+            };
 
-        return smtpClient.SendMailAsync(mailMessage);
+            mailMessage.To.Add(email);
+
+            return smtpClient.SendMailAsync(mailMessage);
+        }
     }
 }
