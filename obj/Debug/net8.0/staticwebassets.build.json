@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "uoHwBHLqV1gHb1KevjUl5p8VMOj3SoehraKKjxSnF8k=",
+  "Hash": "Iq7025vEpdYLtaas9YwW+aLSxLiQIFaOo8iVS5d7s9Y=",
   "Source": "ELLPScore",
   "BasePath": "_content/ELLPScore",
   "Mode": "Default",
@@ -1212,6 +1212,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\login.css"
+    },
+    {
+      "Identity": "C:\\Users\\mathe\\OneDrive\\Área de Trabalho\\ELLPScore\\wwwroot\\css\\registerConfirmed.css",
+      "SourceId": "ELLPScore",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\mathe\\OneDrive\\Área de Trabalho\\ELLPScore\\wwwroot\\",
+      "BasePath": "_content/ELLPScore",
+      "RelativePath": "css/registerConfirmed.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\registerConfirmed.css"
     },
     {
       "Identity": "C:\\Users\\mathe\\OneDrive\\Área de Trabalho\\ELLPScore\\wwwroot\\css\\site.css",

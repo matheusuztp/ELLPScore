@@ -51,8 +51,8 @@
 .form-control {
     width: 100%;
     padding: 10px;
+    border-radius: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
     box-sizing: border-box;
     background-color: #FFFFFF;
 }
@@ -89,7 +89,7 @@
     background-color: #FFFFFF;
     border-radius: 50%;
     padding: 10px;
-    object-fit: cover; /* Ajusta a imagem dentro do espaço definido */
+    object-fit: cover;
 }
 .forgot-password-link {
     display: block;

@@ -1,17 +1,51 @@
 using ELLPScore.Context.DB;
 using ELLPScore.Domain;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new List<CultureInfo>
+    {
+        new CultureInfo("pt-BR") // Adiciona o suporte para português (Brasil)
+    };
+
+    options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("pt-BR");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+});
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ELLPScoreDBContext>(options =>
     options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<Professor>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ELLPScoreDBContext>();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.ExpireTimeSpan = TimeSpan.FromDays(14);
+    options.SlidingExpiration = true;
+});
 
-builder.Services.AddRazorPages();
+builder.Services.AddDefaultIdentity<Professor>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 6;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequiredUniqueChars = 1;
+})
+.AddEntityFrameworkStores<ELLPScoreDBContext>();
+
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+
+builder.Services.AddRazorPages()
+    .AddDataAnnotationsLocalization();
 
 var app = builder.Build();
 
@@ -24,6 +58,9 @@ else
     app.UseExceptionHandler("/Error");
     app.UseHsts();
 }
+
+var localizationOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value;
+app.UseRequestLocalization(localizationOptions);
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

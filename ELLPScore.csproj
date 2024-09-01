@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\register.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
@@ -19,11 +23,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\" />
     <Folder Include="images\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Repositories\" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\css\register.css" />
     <None Include="wwwroot\css\login.css" />
     <None Include="wwwroot\images\user-icon.png" />
   </ItemGroup>

@@ -8,11 +8,8 @@ namespace ELLPScore.Context.Configuration
     {
         public void Configure(EntityTypeBuilder<Professor> builder)
         {
-            builder.HasKey(p => p.ProfessorID);
-
             builder.Property(p => p.Nome).IsRequired().HasMaxLength(255);
             builder.Property(p => p.Email).HasMaxLength(255);
-            builder.Property(p => p.Senha).IsRequired().HasMaxLength(100);
 
             builder.HasMany(p => p.Feedbacks)
                    .WithOne(f => f.Professor)

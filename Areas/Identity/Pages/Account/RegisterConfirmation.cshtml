@@ -1,0 +1,17 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Cadastro Realizado com Sucesso";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/registerConfirmed.css" />
+</head>
+
+<div class="register-container">
+    <div class="register-box">
+        <h2>Cadastro Realizado com Sucesso</h2>
+        <p>Seu cadastro foi realizado com sucesso. Agora você pode fazer login usando suas credenciais.</p>
+        <a href="/Identity/Account/Login" class="btn btn-primary">Voltar ao Login</a>
+    </div>
+</div>

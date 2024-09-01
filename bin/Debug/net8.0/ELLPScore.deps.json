@@ -17,6 +17,11 @@
         },
         "runtime": {
           "ELLPScore.dll": {}
+        },
+        "resources": {
+          "pt-BR/ELLPScore.resources.dll": {
+            "locale": "pt-BR"
+          }
         }
       },
       "Azure.Core/1.35.0": {
