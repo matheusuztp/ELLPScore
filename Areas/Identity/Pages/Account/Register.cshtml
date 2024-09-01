@@ -6,13 +6,12 @@
 
 <head>
     <link rel="stylesheet" href="~/css/register.css" />
-
 </head>
 
 <div class="register-container">
     <div class="register-box">
         <h2>Cadastrar Professor</h2>
-        <form method="post">
+        <form method="post" id="registerForm">
             <div class="form-group">
                 <label asp-for="Input.Nome">Nome</label>
                 <input asp-for="Input.Nome" class="form-control" />
@@ -60,14 +59,15 @@
 
     <script>
         $(document).ready(function () {
-            $('#password').on('keyup', function () {
-                var password = $(this).val();
+            function validatePassword(password) {
+                let isValid = true;
 
                 // Valida se tem pelo menos 6 caracteres
                 if (password.length >= 6) {
                     $('#length').removeClass('text-danger').addClass('text-success');
                 } else {
                     $('#length').removeClass('text-success').addClass('text-danger');
+                    isValid = false;
                 }
 
                 // Valida se tem pelo menos um número
@@ -75,6 +75,7 @@
                     $('#number').removeClass('text-danger').addClass('text-success');
                 } else {
                     $('#number').removeClass('text-success').addClass('text-danger');
+                    isValid = false;
                 }
 
                 // Valida se tem pelo menos uma letra maiúscula
@@ -82,6 +83,7 @@
                     $('#uppercase').removeClass('text-danger').addClass('text-success');
                 } else {
                     $('#uppercase').removeClass('text-success').addClass('text-danger');
+                    isValid = false;
                 }
 
                 // Valida se tem pelo menos uma letra minúscula
@@ -89,6 +91,7 @@
                     $('#lowercase').removeClass('text-danger').addClass('text-success');
                 } else {
                     $('#lowercase').removeClass('text-success').addClass('text-danger');
+                    isValid = false;
                 }
 
                 // Valida se tem pelo menos um caractere especial
@@ -96,6 +99,21 @@
                     $('#special').removeClass('text-danger').addClass('text-success');
                 } else {
                     $('#special').removeClass('text-success').addClass('text-danger');
+                    isValid = false;
+                }
+
+                return isValid;
+            }
+
+            $('#password').on('keyup', function () {
+                validatePassword($(this).val());
+            });
+
+            $('#registerForm').on('submit', function (e) {
+                var password = $('#password').val();
+                if (!validatePassword(password)) {
+                    e.preventDefault(); // Impede o envio do formulário
+                    alert('Por favor, verifique os requisitos de senha antes de continuar.');
                 }
             });
         });
