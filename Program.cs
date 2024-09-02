@@ -54,6 +54,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 builder.Services.AddDefaultIdentity<Professor>(options =>
 {
+    options.SignIn.RequireConfirmedAccount = true;
     options.Password.RequireDigit = true;
     options.Password.RequiredLength = 6;
     options.Password.RequireLowercase = true;
@@ -65,6 +66,7 @@ builder.Services.AddDefaultIdentity<Professor>(options =>
 
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
+builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages()
     .AddDataAnnotationsLocalization();
 
@@ -115,10 +117,9 @@ app.Use(async (context, next) =>
     await next();
 });
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapRazorPages();
-    endpoints.MapDefaultControllerRoute();
-});
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapRazorPages();
 
 app.Run();

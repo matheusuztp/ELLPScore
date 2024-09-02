@@ -1,7 +1,7 @@
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Identity;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Threading.Tasks;
 
 namespace ELLPScore.Areas.Identity.Pages.Account
 {
@@ -14,10 +14,10 @@ namespace ELLPScore.Areas.Identity.Pages.Account
             _signInManager = signInManager;
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPost()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToPage("/Account/Login");
+            return RedirectToPage("/Index");
         }
     }
 }
