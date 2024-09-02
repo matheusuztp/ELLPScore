@@ -45,7 +45,7 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" type="password" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
                 <a href="/Identity/Account/Login" class="btn btn-primary">Voltar ao Login</a>

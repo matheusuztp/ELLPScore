@@ -39,7 +39,7 @@ namespace ELLPScore.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/Dashboard");
+            returnUrl ??= Url.Content("~/");
 
             if (ModelState.IsValid)
             {
@@ -56,7 +56,7 @@ namespace ELLPScore.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Tentativa de login inválida.");
+                    ModelState.AddModelError(string.Empty, "Usuario e/ou senha incorretos.");
                     return Page();
                 }
             }
