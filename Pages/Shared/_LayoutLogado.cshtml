@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - ELLPScore</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <ul class="nav flex-column">
+                <!-- Sidebar Links -->
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-house"></i>
+                        </div>
+                        <span class="menu-text">Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="menu-text">Notas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <span class="menu-text">Desempenho</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <span class="menu-text">Relatórios</span>
+                    </a>
+                </li>
+
+                <!-- Menu Cadastros -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#submenuCadastros" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="submenuCadastros">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <span class="menu-text">Cadastros</span>
+                    </a>
+                    <div class="collapse" id="submenuCadastros">
+                        <ul class="nav flex-column ms-2">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <div class="icon-wrapper-min">
+                                        <i class="fas fa-user-graduate"></i>
+                                    </div>
+                                    <span class="menu-text">Aluno</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <div class="icon-wrapper-min">
+                                        <i class="fas fa-chalkboard-teacher"></i>
+                                    </div>
+                                    <span class="menu-text">Professor</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <div class="icon-wrapper-min">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <span class="menu-text">Disciplina</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <div class="icon-wrapper-min">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <span class="menu-text">Turmas</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+
+
+            <li class="nav-item" style="margin-top:auto">
+                <a href="/Account/Logout" class="nav-link">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </div>
+                    <span class="menu-text">Sair</span>
+                </a>
+            </li>
+
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            @RenderBody()
+        </div>
+
+        <footer class="border-top footer text-muted">
+            &copy; 2024 - ELLPScore
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

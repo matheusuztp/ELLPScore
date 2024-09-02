@@ -400,3 +400,4 @@ C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\bin\Debug\net8.0\pt-BR\ELLPS
 C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.Resources.SharedResource.pt-BR.resources
 C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.csproj.GenerateResource.cache
 C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\pt-BR\ELLPScore.resources.dll
+C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\scopedcss\Pages\Shared\_LayoutLogado.cshtml.rz.scp.css

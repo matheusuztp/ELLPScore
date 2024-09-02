@@ -1,104 +1,46 @@
 ﻿@page
 @model IndexModel
 @{
-    Layout = "_Layout";
+    ViewBag.Title = "Início";
+    Layout = "~/Pages/Shared/_LayoutLogado.cshtml"; // Apontando para o layout com o sidebar
 }
 
-<head>
-    <link rel="stylesheet" href="~/css/dashboard.css">
-</head>
-
-<div class="sidebar">
-    <div class="menu-item">
-        <div class="accordion">
-            <div class="icon-wrapper">
-                <i class="fas fa-user-pen"></i>
-            </div>
-            <div class="menu-text">Cadastros</div>
-        </div>
-        <div class="panel">
-            <a href="#"> Disciplina</a>
-            <a href="#"> Professor</a>
-            <a href="#"> Turma</a>
-            <a href="#"> Aluno</a>
-        </div>
-    </div>
-    <div class="menu-item">
-        <div class="icon-wrapper">
-            <i class="fas fa-star"></i>
-        </div>
-        <div class="menu-text">Notas</div>
-    </div>
-    <div class="menu-item">
-        <div class="icon-wrapper">
-            <i class="fas fa-chart-pie"></i>
-        </div>
-        <div class="menu-text">Desempenho</div>
-    </div>
-    <div class="menu-item">
-        <div class="icon-wrapper">
-            <i class="fas fa-file-alt"></i>
-        </div>
-        <div class="menu-text">Relatórios</div>
-    </div>
-    <div class="menu-item">
-        <div class="icon-wrapper">
-            <i class="fas fa-check-circle"></i>
-        </div>
-        <div class="menu-text">Feedbacks</div>
-    </div>
-    <div class="logout-button">
-        <div class="icon-wrapper">
-            <i class="fas fa-sign-out-alt"></i>
-        </div>
-        <div class="menu-text">Sair</div>
-    </div>
-</div>
 <div class="container">
-    <div class="header">
-        <h1>Início</h1>
-    </div>
-
-    <div class="alunos">
-        <img src="~/images/user-icon.png" alt="User Icon" class="user-icon" />
-        <div>
-            <button class="btn btn-primary">Verificar Notas</button>
-            <button class="btn btn-secondary">Consulta</button>
-        </div>
-    </div>
-
-    <div class="ellp-section">
-        <h2>ELLP</h2>
-        <div class="card">
-            <img src="~/images/user-icon.png" alt="User Icon" class="user-icon" />
-            <div>
-                <h3 class="card-title">Notas</h3>
-                <p class="card-text">Informações Gerais dos Alunos do Projeto ELLP</p>
+    <h2>Início</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <img src="~/images/user-icon.png" class="card-img-top" alt="Placeholder">
             </div>
         </div>
-        <div class="card">
-            <img src="~/images/user-icon.png" alt="User Icon" class="user-icon" />
-            <div>
-                <h3 class="card-title">Turmas e Disciplinas</h3>
-                <p class="card-text">Adicionar/Editar Turmas e Disciplinas</p>
+        <div class="col-md-8">
+            <h3>Alunos</h3>
+            <button class="btn btn-primary mb-2">Verificar Notas</button>
+            <button class="btn btn-primary">Consulta</button>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <h4>ELLP <i class="fas fa-arrow-right"></i></h4>
+        </div>
+        <div class="col-md-6">
+            <div class="media">
+                <img src="~/images/user-icon.png" class="mr-3" alt="Placeholder" style="width:60px;">
+                <div class="media-body">
+                    <h5 class="mt-0">Notas</h5>
+                    Informações Gerais dos Alunos do Projeto ELLP
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="media">
+                <img src="~/images/user-icon.png" class="mr-3" alt="Placeholder" style="width:60px;">
+                <div class="media-body">
+                    <h5 class="mt-0">Turmas e Disciplinas</h5>
+                    Adicionar/Editar Turmas e Disciplinas
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-
-    for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function () {
-            this.classList.toggle("active");
-            var panel = this.nextElementSibling;
-            if (panel.style.display === "block") {
-                panel.style.display = "none";
-            } else {
-                panel.style.display = "block";
-            }
-        });
-    }
-</script>
