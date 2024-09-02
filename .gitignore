@@ -80,10 +80,6 @@ Logs/
 *.msm
 *.msp
 
-# Publish outputs
-wwwroot/*
-!wwwroot/.gitkeep
-
 # NuGet dependencies
 *.nupkg
 packages/

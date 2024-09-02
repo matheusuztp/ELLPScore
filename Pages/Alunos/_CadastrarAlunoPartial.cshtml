@@ -1,0 +1,50 @@
+﻿@page
+@model ELLPScore.Domain.DTO.AlunoInputModel
+
+<form method="post" asp-page-handler="CadastrarAluno">
+    <div class="form-group">
+        <label asp-for="Nome"></label>
+        <input asp-for="Nome" class="form-control" />
+        <span asp-validation-for="Nome" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label asp-for="Serie"></label>
+            <input asp-for="Serie" class="form-control" />
+            <span asp-validation-for="Serie" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="CPF"></label>
+            <input asp-for="CPF" class="form-control" />
+            <span asp-validation-for="CPF" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="Idade"></label>
+            <input asp-for="Idade" class="form-control" />
+            <span asp-validation-for="Idade" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label asp-for="Turma"></label>
+            <input asp-for="Turma" class="form-control" />
+            <span asp-validation-for="Turma" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="Matricula"></label>
+            <input asp-for="Matricula" class="form-control" />
+            <span asp-validation-for="Matricula" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Anotacoes"></label>
+        <textarea asp-for="Anotacoes" class="form-control"></textarea>
+        <span asp-validation-for="Anotacoes" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>

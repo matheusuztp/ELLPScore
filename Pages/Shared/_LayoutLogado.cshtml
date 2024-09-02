@@ -59,8 +59,8 @@
                     <div class="collapse" id="submenuCadastros">
                         <ul class="nav flex-column ms-1">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <div class="icon-wrapper-min">
+                                <a href="/Alunos" class="nav-link">
+                                    <div class="icon-wrapper">
                                         <i class="fas fa-user-graduate"></i>
                                     </div>
                                     <span class="menu-text">Aluno</span>
@@ -120,5 +120,7 @@
     <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

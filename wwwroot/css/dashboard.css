@@ -1,0 +1,76 @@
+﻿.wrapper {
+    display: flex;
+    height: 100vh;
+    flex-direction: row;
+}
+
+.sidebar {
+    width: 100px;
+    background-color: #FEF7FF;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-item {
+    margin-bottom: 15px;
+}
+
+.nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #5e5e5e;
+    padding: 5px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.icon-wrapper {
+    margin-bottom: 5px;
+}
+
+.nav-link .menu-text {
+    font-size: 14px;
+}
+
+.nav-link:hover {
+    background-color: #E8DEF8;
+}
+
+.main-content {
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+footer {
+    text-align: center;
+    padding: 5px 0;
+}
+
+/* Menu Cadastros collapse */
+#submenuCadastros .nav-link {
+    padding-left: 10px;
+}
+
+/* Estilo específico para o botão "Sair" */
+.nav-item[style*="margin-top:auto"] {
+    margin-top: auto !important;
+}
+
+/* Ajustes de ícones e texto para o layout desejado */
+.icon-wrapper i, .icon-wrapper-min i {
+    font-size: 20px;
+}
+
+.modal-dialog {
+    max-width: 80%;
+    margin: 30px auto;
+}
+
+.modal-body {
+    max-height: 80vh;
+    overflow-y: auto;
+}

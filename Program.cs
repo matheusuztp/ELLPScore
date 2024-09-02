@@ -11,6 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 
+builder.Services.AddRazorPages()
+    .AddDataAnnotationsLocalization();
+
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>
@@ -29,29 +32,6 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ELLPScoreDBContext>(options =>
     options.UseSqlServer(connectionString));
 
-builder.Services.ConfigureApplicationCookie(options =>
-{
-    options.LoginPath = "/Account/Login";
-    options.LogoutPath = "/Account/Logout";
-    options.AccessDeniedPath = "/Account/AccessDenied";
-    options.SlidingExpiration = true;
-    options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
-    options.Events.OnRedirectToLogin = context =>
-    {
-        // Se não houver ReturnUrl, redireciona para o Dashboard
-        if (string.IsNullOrEmpty(context.Request.Path) ||
-            context.Request.Path == options.LoginPath)
-        {
-            context.Response.Redirect("/Index");
-        }
-        else
-        {
-            context.Response.Redirect($"{options.LoginPath}?{options.ReturnUrlParameter}={context.Request.Path}");
-        }
-        return Task.CompletedTask;
-    };
-});
-
 builder.Services.AddDefaultIdentity<Professor>(options =>
 {
     options.SignIn.RequireConfirmedAccount = true;
@@ -65,10 +45,7 @@ builder.Services.AddDefaultIdentity<Professor>(options =>
 .AddEntityFrameworkStores<ELLPScoreDBContext>();
 
 builder.Services.AddTransient<IEmailSender, EmailSender>();
-
-builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages()
-    .AddDataAnnotationsLocalization();
+builder.Services.AddScoped<IAlunoService, AlunoService>();
 
 var app = builder.Build();
 
@@ -117,9 +94,6 @@ app.Use(async (context, next) =>
     await next();
 });
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
 app.Run();

@@ -1,0 +1,74 @@
+﻿@page
+@model Alunos.IndexModel
+@{
+    ViewData["Title"] = "Lista de Alunos";
+    Layout = "~/Pages/Shared/_LayoutLogado.cshtml"; // Apontando para o layout com o sidebar
+}
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2>Alunos Cadastrados</h2>
+         <button class="btn btn-primary" id="btnCadastrarAluno">Cadastrar Aluno</button>
+    </div>
+
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Série</th>
+                <th>CPF</th>
+                <th>Idade</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var aluno in Model.Alunos)
+            {
+                <tr>
+                    <td>@aluno.Nome</td>
+                    <td>@aluno.Email</td>
+                    <td>@aluno.Serie</td>
+                    <td>@aluno.CPF</td>
+                    <td>@aluno.Idade</td>
+                    <td>
+                        <!-- Botões para editar ou excluir aluno -->
+                        <button class="btn btn-sm btn-warning">Editar</button>
+                        <button class="btn btn-sm btn-danger">Excluir</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="cadastrarAlunoModal" tabindex="-1" role="dialog" aria-labelledby="cadastrarAlunoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cadastrarAlunoModalLabel">Cadastrar Aluno</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="formCadastrarAluno">
+                    <!-- Aqui a Partial View é carregada -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+        $(document).ready(function(){
+            $("#btnCadastrarAluno").click(function(){
+                $.get("@Url.Page("Index", "CadastrarAlunoPartial")", function(data){
+                    $("#formCadastrarAluno").html(data);
+                    $("#cadastrarAlunoModal").modal("show");
+                });
+            });
+        });
+</script>
+}

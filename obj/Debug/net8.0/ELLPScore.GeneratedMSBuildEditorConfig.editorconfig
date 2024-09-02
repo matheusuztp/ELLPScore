@@ -78,6 +78,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/ELLPScore/ELLPScore/Pages/Alunos/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWx1bm9zXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ELLPScore/ELLPScore/Pages/Alunos/_CadastrarAlunoPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWx1bm9zXF9DYWRhc3RyYXJBbHVub1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/ELLPScore/ELLPScore/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
