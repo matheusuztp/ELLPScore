@@ -1,0 +1,40 @@
+﻿form {
+    max-width: 100%;
+    margin: 2px auto;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-group input, .form-group textarea {
+    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 60%;
+}
+
+.form-group textarea {
+    height: 100px;
+    resize: none;
+}
+
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+}

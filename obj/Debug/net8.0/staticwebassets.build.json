@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "IdxShT5as2mR64cTjKX2gTmdX8qz215ryEICNfOgGCM=",
+  "Hash": "62UoJqDXaXpxrhIsw99K8JFWtm064Zt7/l9yIqgyTe8=",
   "Source": "ELLPScore",
   "BasePath": "_content/ELLPScore",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\ELLPScore\\ELLPScore\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ELLPScore.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\ELLPScore\\ELLPScore\\wwwroot\\css\\cadastro.css",
+      "SourceId": "ELLPScore",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\ELLPScore\\ELLPScore\\wwwroot\\",
+      "BasePath": "_content/ELLPScore",
+      "RelativePath": "css/cadastro.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\cadastro.css"
     },
     {
       "Identity": "C:\\ELLPScore\\ELLPScore\\wwwroot\\css\\dashboard.css",

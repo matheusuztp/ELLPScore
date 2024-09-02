@@ -1,7 +1,6 @@
 using ELLPScore.Context.DB;
 using ELLPScore.Domain;
 using ELLPScore.Services;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -10,7 +9,6 @@ using System.Globalization;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
-
 builder.Services.AddRazorPages()
     .AddDataAnnotationsLocalization();
 

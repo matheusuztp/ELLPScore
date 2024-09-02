@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\ELLPScore.bundle.scp.css"
     },
     {
+      "Id": "C:\\ELLPScore\\ELLPScore\\wwwroot\\css\\cadastro.css",
+      "PackagePath": "staticwebassets\\css\\cadastro.css"
+    },
+    {
       "Id": "C:\\ELLPScore\\ELLPScore\\wwwroot\\css\\dashboard.css",
       "PackagePath": "staticwebassets\\css\\dashboard.css"
     },

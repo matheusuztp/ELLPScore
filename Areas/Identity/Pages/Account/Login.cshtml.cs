@@ -33,8 +33,6 @@ namespace ELLPScore.Areas.Identity.Pages.Account
             [Display(Name = "Senha")]
             public string Password { get; set; }
 
-            [Display(Name = "Lembrar-me")]
-            public bool RememberMe { get; set; }
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -43,7 +41,7 @@ namespace ELLPScore.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, false, lockoutOnFailure: false);
 
                 if (result.Succeeded)
                 {
