@@ -2,9 +2,6 @@ using ELLPScore.Domain;
 using ELLPScore.Domain.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace ELLPScore.Pages.Alunos
 {
@@ -20,17 +17,21 @@ namespace ELLPScore.Pages.Alunos
         [BindProperty]
         public AlunoInputModel Aluno { get; set; }
 
-        public IList<AlunoViewModel> Alunos { get; set; }
+        public IList<Aluno> Alunos { get; set; }
+        public IList<Turma> Turmas { get; set; }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            Alunos = _alunoService.GetAllAlunos();
+            Alunos = await _alunoService.GetAllAlunosAsync();
+            Turmas = _alunoService.GetAllTurmas();
         }
 
         public async Task<IActionResult> OnPostCadastrarAlunoAsync()
         {
             if (!ModelState.IsValid)
             {
+                Alunos = await _alunoService.GetAllAlunosAsync(); // Recarrega os alunos para exibir novamente na página
+                Turmas = _alunoService.GetAllTurmas();            // Recarrega as turmas para exibir novamente na página
                 return Page();
             }
 
@@ -41,10 +42,15 @@ namespace ELLPScore.Pages.Alunos
                 Serie = Aluno.Serie,
                 CPF = Aluno.CPF,
                 Idade = Aluno.Idade,
-                Turma = Aluno.Turma,
                 Matricula = Aluno.Matricula,
-                Anotacoes = Aluno.Anotacoes
+                Anotacoes = Aluno.Anotacoes,
+                TurmaAlunos = new List<TurmaAluno>()
             };
+
+            foreach (var turmaId in Aluno.TurmaIds)
+            {
+                novoAluno.TurmaAlunos.Add(new TurmaAluno { Aluno = novoAluno, TurmaID = turmaId });
+            }
 
             await _alunoService.CadastrarAlunoAsync(novoAluno);
             return RedirectToPage();
@@ -52,7 +58,7 @@ namespace ELLPScore.Pages.Alunos
 
         public async Task<IActionResult> OnGetCadastrarAlunoPartial()
         {
-            return RedirectToPage("_CadastrarAlunoPartial", new AlunoInputModel());
+            return RedirectToPage("_CadastrarAlunoPartial", new AlunoInputModel() { Turmas = this.Turmas });
         }
     }
 }

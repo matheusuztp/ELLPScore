@@ -1,40 +1,37 @@
-﻿using ELLPScore.Domain;
+﻿using ELLPScore.Context.DB;
+using ELLPScore.Domain;
 using ELLPScore.Domain.DTO;
+using Microsoft.EntityFrameworkCore;
 
 public interface IAlunoService
 {
-    IList<AlunoViewModel> GetAllAlunos();
+    Task<IList<Aluno>> GetAllAlunosAsync();
     Task CadastrarAlunoAsync(Aluno aluno);
+    IList<Turma> GetAllTurmas(); 
 }
 
 public class AlunoService : IAlunoService
 {
-    private readonly List<Aluno> _alunos = new List<Aluno>();
+    private readonly ELLPScoreDBContext _context;
 
-    public IList<AlunoViewModel> GetAllAlunos()
+    public AlunoService(ELLPScoreDBContext context)
     {
-        var viewModel = new List<AlunoViewModel>();
-        foreach (var aluno in _alunos)
-        {
-            viewModel.Add(new AlunoViewModel
-            {
-                AlunoID = aluno.AlunoID,
-                Nome = aluno.Nome,
-                Email = aluno.Email,
-                Serie = aluno.Serie,
-                CPF = aluno.CPF,
-                Idade = aluno.Idade,
-                Turma = aluno.Turma,
-                Matricula = aluno.Matricula
-            });
-        }
-        return viewModel;
+        _context = context;
     }
 
-    public Task CadastrarAlunoAsync(Aluno aluno)
+    public async Task<IList<Aluno>> GetAllAlunosAsync()
     {
-        aluno.AlunoID = _alunos.Count + 1; // Simulação de incremento de ID
-        _alunos.Add(aluno);
-        return Task.CompletedTask;
+        return await _context.Alunos.ToListAsync();
+    }
+
+    public async Task CadastrarAlunoAsync(Aluno aluno)
+    {
+        _context.Alunos.Add(aluno);
+        await _context.SaveChangesAsync();
+    }
+
+    public IList<Turma> GetAllTurmas()
+    {
+        return _context.Turmas.ToList();
     }
 }

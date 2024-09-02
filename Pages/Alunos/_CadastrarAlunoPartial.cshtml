@@ -42,9 +42,9 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group">
-                <label asp-for="Turma"></label>
-                <input asp-for="Turma" class="form-control" />
-                <span asp-validation-for="Turma" class="text-danger"></span>
+                <label asp-for="TurmaIds">Turmas</label>
+                <select asp-for="TurmaIds" class="form-control" multiple="multiple" asp-items="@(new SelectList(Model.Turmas, "TurmaId", "Nome"))"></select>
+                <span asp-validation-for="TurmaIds" class="text-danger"></span>
             </div>
         </div>
         <div class="col-sm-6">

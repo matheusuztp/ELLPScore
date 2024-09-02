@@ -1,0 +1,32 @@
+﻿@page
+@model CadastrarTurma.IndexModel
+@{
+    ViewData["Title"] = "Cadastrar Turma";
+    Layout = "~/Pages/Shared/_LayoutLogado.cshtml"; // Apontando para o layout com o sidebar
+}
+
+<div class="container">
+    <form method="post" asp-page-handler="CadastrarTurma">
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <label asp-for="Turma.CodigoOuNome"></label>
+                    <input asp-for="Turma.CodigoOuNome" class="form-control" />
+                    <span asp-validation-for="Turma.CodigoOuNome" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="Turma.ProfessorID">Professor</label>
+                    <select asp-for="Turma.ProfessorID" class="form-control" asp-items="@((SelectList)ViewData["Professores"])">
+                        <option value="">Selecione um professor</option>
+                    </select>
+                    <span asp-validation-for="Turma.ProfessorID" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+</div>
+

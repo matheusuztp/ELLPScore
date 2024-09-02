@@ -43,7 +43,11 @@ builder.Services.AddDefaultIdentity<Professor>(options =>
 .AddEntityFrameworkStores<ELLPScoreDBContext>();
 
 builder.Services.AddTransient<IEmailSender, EmailSender>();
-builder.Services.AddScoped<IAlunoService, AlunoService>();
+builder.Services.AddTransient<IAlunoService, AlunoService>();
+builder.Services.AddTransient<ITurmaService, TurmaService>();
+builder.Services.AddTransient<IDisciplinaService, DisciplinaService>();
+builder.Services.AddTransient<IProfessorService, ProfessorService>();
+
 
 var app = builder.Build();
 
