@@ -1,10 +1,104 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    Layout = "_Layout";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<head>
+    <link rel="stylesheet" href="~/css/dashboard.css">
+</head>
+
+<div class="sidebar">
+    <div class="menu-item">
+        <div class="accordion">
+            <div class="icon-wrapper">
+                <i class="fas fa-user-pen"></i>
+            </div>
+            <div class="menu-text">Cadastros</div>
+        </div>
+        <div class="panel">
+            <a href="#"> Disciplina</a>
+            <a href="#"> Professor</a>
+            <a href="#"> Turma</a>
+            <a href="#"> Aluno</a>
+        </div>
+    </div>
+    <div class="menu-item">
+        <div class="icon-wrapper">
+            <i class="fas fa-star"></i>
+        </div>
+        <div class="menu-text">Notas</div>
+    </div>
+    <div class="menu-item">
+        <div class="icon-wrapper">
+            <i class="fas fa-chart-pie"></i>
+        </div>
+        <div class="menu-text">Desempenho</div>
+    </div>
+    <div class="menu-item">
+        <div class="icon-wrapper">
+            <i class="fas fa-file-alt"></i>
+        </div>
+        <div class="menu-text">Relatórios</div>
+    </div>
+    <div class="menu-item">
+        <div class="icon-wrapper">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="menu-text">Feedbacks</div>
+    </div>
+    <div class="logout-button">
+        <div class="icon-wrapper">
+            <i class="fas fa-sign-out-alt"></i>
+        </div>
+        <div class="menu-text">Sair</div>
+    </div>
 </div>
+<div class="container">
+    <div class="header">
+        <h1>Início</h1>
+    </div>
+
+    <div class="alunos">
+        <img src="~/images/user-icon.png" alt="User Icon" class="user-icon" />
+        <div>
+            <button class="btn btn-primary">Verificar Notas</button>
+            <button class="btn btn-secondary">Consulta</button>
+        </div>
+    </div>
+
+    <div class="ellp-section">
+        <h2>ELLP</h2>
+        <div class="card">
+            <img src="~/images/user-icon.png" alt="User Icon" class="user-icon" />
+            <div>
+                <h3 class="card-title">Notas</h3>
+                <p class="card-text">Informações Gerais dos Alunos do Projeto ELLP</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="~/images/user-icon.png" alt="User Icon" class="user-icon" />
+            <div>
+                <h3 class="card-title">Turmas e Disciplinas</h3>
+                <p class="card-text">Adicionar/Editar Turmas e Disciplinas</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            } else {
+                panel.style.display = "block";
+            }
+        });
+    }
+</script>

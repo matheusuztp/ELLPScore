@@ -1,6 +1,7 @@
 using ELLPScore.Context.DB;
 using ELLPScore.Domain;
 using ELLPScore.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -30,8 +31,25 @@ builder.Services.AddDbContext<ELLPScoreDBContext>(options =>
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.ExpireTimeSpan = TimeSpan.FromDays(14);
+    options.LoginPath = "/Account/Login";
+    options.LogoutPath = "/Account/Logout";
+    options.AccessDeniedPath = "/Account/AccessDenied";
     options.SlidingExpiration = true;
+    options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+    options.Events.OnRedirectToLogin = context =>
+    {
+        // Se não houver ReturnUrl, redireciona para o Dashboard
+        if (string.IsNullOrEmpty(context.Request.Path) ||
+            context.Request.Path == options.LoginPath)
+        {
+            context.Response.Redirect("/Index");
+        }
+        else
+        {
+            context.Response.Redirect($"{options.LoginPath}?{options.ReturnUrlParameter}={context.Request.Path}");
+        }
+        return Task.CompletedTask;
+    };
 });
 
 builder.Services.AddDefaultIdentity<Professor>(options =>
@@ -97,5 +115,10 @@ app.Use(async (context, next) =>
     await next();
 });
 
-app.MapRazorPages();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapRazorPages();
+    endpoints.MapDefaultControllerRoute();
+});
+
 app.Run();

@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\css\\confirm-email-change.css"
     },
     {
+      "Id": "C:\\Users\\mathe\\OneDrive\\Área de Trabalho\\ELLPScore\\wwwroot\\css\\dashboard.css",
+      "PackagePath": "staticwebassets\\css\\dashboard.css"
+    },
+    {
       "Id": "C:\\Users\\mathe\\OneDrive\\Área de Trabalho\\ELLPScore\\wwwroot\\css\\login.css",
       "PackagePath": "staticwebassets\\css\\login.css"
     },

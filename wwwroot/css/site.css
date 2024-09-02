@@ -17,6 +17,18 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 10;
+    line-height: 25px !important;
+    font-size: 12px;
+    border-top: 1px #dee2e6 !important;
 }

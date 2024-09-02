@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ELLPScore")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7608ff73f2c5254bd24746423b00e3bdcc94c2d7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+86be011ec8cf1d7806766166ef8f2fdb54c6da8f")]
 [assembly: System.Reflection.AssemblyProductAttribute("ELLPScore")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ELLPScore")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
