@@ -50,6 +50,7 @@ builder.Services.AddTransient<ITurmaService, TurmaService>();
 builder.Services.AddTransient<IDisciplinaService, DisciplinaService>();
 builder.Services.AddTransient<IProfessorService, ProfessorService>();
 builder.Services.AddTransient<INotaService, NotaService>();
+builder.Services.AddTransient<IFeedbackService, FeedbackService>();
 
 var app = builder.Build();
 

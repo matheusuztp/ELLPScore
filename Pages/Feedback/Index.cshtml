@@ -1,0 +1,82 @@
+﻿@page
+@model FeedbackModel
+@{
+    ViewData["Title"] = "Feedbacks";
+    Layout = "~/Pages/Shared/_LayoutLogado.cshtml";
+}
+<head>
+    <link rel="stylesheet" href="~/css/feedback.css" />
+</head>
+<div class="container">
+    <h2 class="text-center">@ViewData["Title"]</h2>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    <form id="feedbackForm" method="post" class="feedback-form">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label>Aluno:</label>
+                <select name="AlunoID" id="alunoSelect" class="form-control">
+                    @foreach (var aluno in Model.Alunos)
+                    {
+                        <option value="@aluno.Value">@aluno.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="Matricula">Matrícula:</label>
+                <input type="text" name="Matrícula" id="matriculaInput" class="form-control" value="@Model.Matricula" readonly />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <label for="Feedback" class="feedback-label">Feedback do Professor:</label>
+                <textarea id="Feedback" name="Feedback" class="form-control" rows="50"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <button type="submit" class="btn btn-primary">Enviar Feedback</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <!-- CKEditor Script -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Feedback'))
+            .catch(error => {
+                console.error(error);
+            });
+
+        $(document).ready(function () {
+            $('#alunoSelect').on('change', function () {
+                var alunoId = $('#alunoSelect').val();
+                if (alunoId) {
+                    $.ajax({
+                        url: '@Url.Page("Index", new { handler = "GetMatriculaPorAluno" })',
+                        type: 'GET',
+                        data: { alunoId: alunoId },
+                        success: function (data) {
+                            $('#matriculaInput').val(data[0]);
+                        },
+                        error: function () {
+                            alert('Erro ao buscar a matrícula do aluno.');
+                        }
+                    });
+                } else {
+                    $('#matriculaInput').val('');
+                }
+            });
+        }
+    </script>
+}

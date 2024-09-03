@@ -1,0 +1,33 @@
+﻿.feedback-form {
+    background-color: #F7F7F7;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+    .feedback-form .form-control {
+        background-color: #EEEEEE;
+        border: none;
+        border-radius: 4px;
+        padding: 10px;
+    }
+
+    .feedback-form .feedback-label {
+        font-size: 1.2rem;
+        color: #009999; /* Cor similar ao design */
+    }
+
+    .feedback-form .btn-primary {
+        background-color: #009999; /* Cor similar ao botão do design */
+        border: none;
+        padding: 10px 20px;
+        font-size: 1rem;
+        border-radius: 4px;
+    }
+
+        .feedback-form .btn-primary:hover {
+            background-color: #007777; /* Cor de hover para o botão */
+        }
+
+    .feedback-form textarea.form-control {
+        height: 150px; /* Altura específica para a textarea */
+    }

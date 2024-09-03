@@ -19,24 +19,6 @@
                 <label>Turma:</label>
                 <input type="text" name="Turma" id="turmaInput" class="form-control" value="@Model.Turma" readonly />
             </div>
-            @* <div class="col-md-4">
-            <label>Turma:</label>
-            <select name="TurmaID" class="form-control">
-            @foreach (var turma in Model.Turmas)
-            {
-            var isSelected = "";
-            @foreach (var aluno in Model.Alunos)
-            {
-            if (aluno.Value == Model.AlunoSelecionadoId.ToString())
-            {
-            isSelected = turma.Value == Model.AlunoSelecionadoId.ToString() ? "selected" : "";
-            }
-            <option value="@aluno.Value" isSelected>@aluno.Text</option>
-            }
-            <option value="@turma.Value">@turma.Text</option>
-            }
-            </select>
-            </div> *@
             <div class="col-md-3">
                 <label>Serie:</label>
                 <input type="text" name="Serie" id="serieInput" class="form-control" value="@Model.Serie" readonly />
