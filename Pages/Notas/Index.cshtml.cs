@@ -7,6 +7,7 @@ using ELLPScore.Services;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
+using System.Reflection;
 
 namespace ELLPScore.Pages.Notas
 {
@@ -32,6 +33,7 @@ namespace ELLPScore.Pages.Notas
         public SelectList Alunos { get; set; }
         public string Serie { get; set; }
         public string Turma { get; set; }
+        public SelectList Periodos { get; set; }
 
         [BindProperty]
         public int AlunoSelecionadoId { get; set; }
@@ -39,10 +41,23 @@ namespace ELLPScore.Pages.Notas
         public void OnGet(int? alunoId = null)
         {
             RefreshData(alunoId);
+            Periodos = new SelectList(Enum.GetValues(typeof(Periodos)).Cast<Periodos>().Select(p =>
+                                        new SelectListItem(
+                                            p.GetType().GetField(p.ToString())
+                                            .GetCustomAttribute<DisplayAttribute>()?.Name ?? p.ToString(),
+                                            p.ToString())),
+                                        "Value", "Text");
         }
 
         public void RefreshData(int? alunoId = null)
         {
+            Periodos = new SelectList(Enum.GetValues(typeof(Periodos)).Cast<Periodos>().Select(p =>
+                                        new SelectListItem(
+                                            p.GetType().GetField(p.ToString())
+                                            .GetCustomAttribute<DisplayAttribute>()?.Name ?? p.ToString(),
+                                            p.ToString())),
+                                        "Value", "Text");
+
             Disciplinas = new SelectList(_disciplinaService.GetAllDisciplinas(), "DisciplinaID", "Nome");
             Turmas = new SelectList(_turmaService.GetAllTurmas(), "TurmaID", "CodigoOuNome");
             Alunos = new SelectList(_alunoService.GetAllAlunos(), "AlunoID", "Nome");
@@ -150,8 +165,6 @@ namespace ELLPScore.Pages.Notas
         public int AlunoID { get; set; }
         public int DisciplinaID { get; set; }
         public int TurmaID { get; set; }
-
-        [StringLength(50, ErrorMessage = "O período não pode exceder 50 caracteres.")]
         public string? Periodo { get; set; }
 
         [Required(ErrorMessage = "A nota é obrigatória.")]
@@ -161,3 +174,4 @@ namespace ELLPScore.Pages.Notas
         public string Serie { get; set; }
     }
 }
+

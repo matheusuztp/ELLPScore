@@ -21,7 +21,19 @@
                     <td>@nota.Aluno.Serie</td>
                     <td>@nota.Aluno.Nome</td>
                     <td>@nota.Disciplina.Nome</td>
-                    <td>@nota.Periodo</td>
+                    <td>
+                        @{
+                            if (Enum.TryParse(typeof(Periodos), nota.Periodo, out var periodoEnum))
+                            {
+                                var periodoDisplayName = ((Periodos)periodoEnum).GetDisplayName();
+                                @periodoDisplayName
+                            }
+                            else
+                            {
+                                @nota.Periodo 
+                            }
+                        }
+                    </td>
                     <td>@nota.NotaValor</td>
                     <td>
                         <form id="deleteForm-@nota.NotaID" method="post" asp-page-handler="DeleteNota" asp-route-id="@nota.NotaID" style="display:inline;">

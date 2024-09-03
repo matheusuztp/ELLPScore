@@ -20,22 +20,22 @@
                 <input type="text" name="Turma" id="turmaInput" class="form-control" value="@Model.Turma" readonly />
             </div>
             @* <div class="col-md-4">
-                <label>Turma:</label>
-                <select name="TurmaID" class="form-control">
-                    @foreach (var turma in Model.Turmas)
-                    {
-                        var isSelected = "";
-                        @foreach (var aluno in Model.Alunos)
-                        {
-                            if (aluno.Value == Model.AlunoSelecionadoId.ToString())
-                            {
-                                isSelected = turma.Value == Model.AlunoSelecionadoId.ToString() ? "selected" : "";
-                            }
-                            <option value="@aluno.Value" isSelected>@aluno.Text</option>
-                        }
-                        <option value="@turma.Value">@turma.Text</option>
-                    }
-                </select>
+            <label>Turma:</label>
+            <select name="TurmaID" class="form-control">
+            @foreach (var turma in Model.Turmas)
+            {
+            var isSelected = "";
+            @foreach (var aluno in Model.Alunos)
+            {
+            if (aluno.Value == Model.AlunoSelecionadoId.ToString())
+            {
+            isSelected = turma.Value == Model.AlunoSelecionadoId.ToString() ? "selected" : "";
+            }
+            <option value="@aluno.Value" isSelected>@aluno.Text</option>
+            }
+            <option value="@turma.Value">@turma.Text</option>
+            }
+            </select>
             </div> *@
             <div class="col-md-3">
                 <label>Serie:</label>
@@ -64,7 +64,12 @@
             </div>
             <div class="col-md-3">
                 <label>Período:</label>
-                <input type="text" name="Periodo" class="form-control" />
+                <select name="Período" class="form-control">
+                    @foreach (var per in Model.Periodos)
+                    {
+                        <option value="@per.Value" isSelected>@per.Text</option>
+                    }
+                </select>
             </div>
             <div class="col-md-2">
                 <label for="ValorNota">Nota:</label>
@@ -83,7 +88,7 @@
     <div id="grid">
         <partial name="_NotaPartial" model="@Model.Notas" />
     </div>
-    
+
 </div>
 
 </div>
@@ -92,27 +97,27 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script>
-        
+
     </script>
 
     <script>
-            function confirmDelete(notaId) {
-                Swal.fire({
-                    title: 'Tem certeza?',
-                    text: "Esta ação é irreversível. Deseja realmente excluir?",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Sim, excluir!',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Submete o formulário de exclusão manualmente
-                        $('#deleteForm-' + notaId).submit();
-                    }
-                });
-            }    
+        function confirmDelete(notaId) {
+            Swal.fire({
+                title: 'Tem certeza?',
+                text: "Esta ação é irreversível. Deseja realmente excluir?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim, excluir!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Submete o formulário de exclusão manualmente
+                    $('#deleteForm-' + notaId).submit();
+                }
+            });
+        }
     </script>
     <script>
         $(document).ready(function () {
@@ -120,7 +125,7 @@
                 var alunoId = $('#alunoSelect').val();
                 if (alunoId) {
                     $.ajax({
-                        url: '@Url.Page("Index", new { handler = "GetSeriePorAluno" })', 
+                        url: '@Url.Page("Index", new { handler = "GetSeriePorAluno" })',
                         type: 'GET',
                         data: { alunoId: alunoId },
                         success: function (data) {
@@ -142,14 +147,14 @@
 
             $('#notaForm').on('submit', function (e) {
                 e.preventDefault();
-        
+
                 var form = $(this);
                 var alunoId = $('#alunoSelect').val();
 
                 $.ajax({
-                    url: '@Url.Page("Index", new { handler = "Post" })', 
+                    url: '@Url.Page("Index", new { handler = "Post" })',
                     type: 'POST',
-                    data: form.serialize(), 
+                    data: form.serialize(),
                     success: function () {
                         $('#grid').load('/Notas?handler=NotaPartial&alunoId=' + alunoId);
                     },
