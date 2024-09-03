@@ -14,15 +14,29 @@
 
     <form id="notaForm" method="post" style="padding: 0 30vh;">
         <div class="row">
+
             <div class="col-md-4">
+                <label>Turma:</label>
+                <input type="text" name="Turma" id="turmaInput" class="form-control" value="@Model.Turma" readonly />
+            </div>
+            @* <div class="col-md-4">
                 <label>Turma:</label>
                 <select name="TurmaID" class="form-control">
                     @foreach (var turma in Model.Turmas)
                     {
+                        var isSelected = "";
+                        @foreach (var aluno in Model.Alunos)
+                        {
+                            if (aluno.Value == Model.AlunoSelecionadoId.ToString())
+                            {
+                                isSelected = turma.Value == Model.AlunoSelecionadoId.ToString() ? "selected" : "";
+                            }
+                            <option value="@aluno.Value" isSelected>@aluno.Text</option>
+                        }
                         <option value="@turma.Value">@turma.Text</option>
                     }
                 </select>
-            </div>
+            </div> *@
             <div class="col-md-3">
                 <label>Serie:</label>
                 <input type="text" name="Serie" id="serieInput" class="form-control" value="@Model.Serie" readonly />
@@ -66,84 +80,53 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         </div>
     </form>
-
-    <table class="table table-bordered mt-5" id="notasTable">
-        <thead>
-            <tr>
-                <th>Turma</th>
-                <th>Série</th>
-                <th>Nome do Aluno</th>
-                <th>Matéria</th>
-                <th>Período</th>
-                <th>Nota</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model.Notas != null && Model.Notas.Any())
-            {
-                foreach (var nota in Model.Notas)
-                {
-                    <tr>
-                        <td>@nota.Turma.CodigoOuNome</td>
-                        <td>@nota.Aluno.Serie</td>
-                        <td>@nota.Aluno.Nome</td>
-                        <td>@nota.Disciplina.Nome</td>
-                        <td>@nota.Periodo</td>
-                        <td>@nota.NotaValor</td><td>
-                        <form id="deleteForm-@nota.NotaID" method="post" asp-action="DeleteNota" asp-route-id="@nota.NotaID" style="display:inline;">
-                            <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(@nota.NotaID, @nota.AlunoID)">
-                                X
-                            </button>
-                        </form>
-                    </td>
-                    </tr>
-                }
-            }
-            else
-            {
-                <tr>
-                    <td colspan="6" class="text-center">Nenhuma nota encontrada</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div id="grid">
+        <partial name="_NotaPartial" model="@Model.Notas" />
+    </div>
+    
 </div>
 
 </div>
 
 @section Scripts {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <script>
-    function confirmDelete(notaId, alunoId) {
-            Swal.fire({
-                title: 'Tem certeza?',
-                text: "Esta ação é irreversível. Deseja realmente excluir?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sim, excluir!',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Submete o formulário de exclusão
-                    document.getElementById(`deleteForm-${notaId, alunoId}`).submit();
-                }
-            })
-        }    
+        
+    </script>
+
+    <script>
+            function confirmDelete(notaId) {
+                Swal.fire({
+                    title: 'Tem certeza?',
+                    text: "Esta ação é irreversível. Deseja realmente excluir?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sim, excluir!',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Submete o formulário de exclusão manualmente
+                        $('#deleteForm-' + notaId).submit();
+                    }
+                });
+            }    
     </script>
     <script>
         $(document).ready(function () {
             $('#alunoSelect').on('change', function () {
-                var alunoId = $(this).val();
+                var alunoId = $('#alunoSelect').val();
                 if (alunoId) {
                     $.ajax({
-                        url: '@Url.Page("Index", new { handler = "Get" })', 
+                        url: '@Url.Page("Index", new { handler = "GetSeriePorAluno" })', 
                         type: 'GET',
                         data: { alunoId: alunoId },
                         success: function (data) {
-                            $('#serieInput').val(data);
+                            $('#serieInput').val(data[0]);
+                            $('#turmaInput').val(data[1]);
+                            $('#grid').load('/Notas?handler=NotaPartial&alunoId=' + alunoId);
                         },
                         error: function () {
                             alert('Erro ao buscar a série do aluno.');
@@ -153,6 +136,33 @@
                     $('#serieInput').val('');
                 }
             });
+
+
+
+
+            $('#notaForm').on('submit', function (e) {
+                e.preventDefault();
+        
+                var form = $(this);
+                var alunoId = $('#alunoSelect').val();
+
+                $.ajax({
+                    url: '@Url.Page("Index", new { handler = "Post" })', 
+                    type: 'POST',
+                    data: form.serialize(), 
+                    success: function () {
+                        $('#grid').load('/Notas?handler=NotaPartial&alunoId=' + alunoId);
+                    },
+                    error: function () {
+                        alert('Erro ao salvar a nota.');
+                    }
+                });
+            });
+
+
+
         });
+
+
     </script>
 }

@@ -31,6 +31,7 @@ namespace ELLPScore.Pages.Notas
         public SelectList Turmas { get; set; }
         public SelectList Alunos { get; set; }
         public string Serie { get; set; }
+        public string Turma { get; set; }
 
         [BindProperty]
         public int AlunoSelecionadoId { get; set; }
@@ -51,6 +52,7 @@ namespace ELLPScore.Pages.Notas
                 AlunoSelecionadoId = alunoId.Value;
                 var aluno = _alunoService.GetAlunoById(AlunoSelecionadoId);
                 Serie = aluno?.Serie ?? string.Empty;
+                Turma = aluno?.Turma.CodigoOuNome ?? string.Empty;
                 Notas = _notaService.GetAllNotas(AlunoSelecionadoId) ?? new List<Nota>();
             }
             else if (Alunos.Any())
@@ -58,6 +60,7 @@ namespace ELLPScore.Pages.Notas
                 AlunoSelecionadoId = int.Parse(Alunos.First().Value);
                 var aluno = _alunoService.GetAlunoById(AlunoSelecionadoId);
                 Serie = aluno?.Serie ?? string.Empty;
+                Turma = aluno?.Turma.CodigoOuNome ?? string.Empty;
                 Notas = _notaService.GetAllNotas(AlunoSelecionadoId) ?? new List<Nota>();
             }
         }
@@ -76,7 +79,7 @@ namespace ELLPScore.Pages.Notas
                 erro += "Turma deve estar selecionada." + Environment.NewLine;
 
             decimal valorNota = 0;
-            if (input.ValorNota.Contains('.'))
+            if (input.ValorNota != null && input.ValorNota.Contains('.'))
                 valorNota = decimal.Parse(input.ValorNota.Replace('.', ','));
 
             if(valorNota > 100 || valorNota < 0)
@@ -99,7 +102,6 @@ namespace ELLPScore.Pages.Notas
                 Periodo = input.Periodo,
                 NotaValor = valorNota,
                 Serie = input.Serie
-
             };
 
             if (!_notaService.CadastrarNota(nota, out string erroCad))
@@ -118,21 +120,28 @@ namespace ELLPScore.Pages.Notas
             if (aluno != null)
             {
                 RefreshData(alunoId);
-                return new JsonResult(aluno.Serie);
+                var data = new string[] { aluno.Serie, aluno.Turma?.CodigoOuNome ?? string.Empty };
+                return new JsonResult(data);
             }
-            RefreshData(alunoId);
             return new JsonResult(string.Empty);
         }
 
-        public IActionResult OnPostDeleteNotaAsync(int id, int alunoId)
+        public IActionResult OnPostDeleteNotaAsync(int id)
         {
-            if(!_notaService.ExcluirNota(id, out string erro))
+            var alunoId = _notaService.GetAllNotas().FirstOrDefault(a => a.NotaID == id).AlunoID;
+            if (!_notaService.ExcluirNota(id, out string erro))
             {
                 ModelState.AddModelError(string.Empty, erro);
-
             }
+
             RefreshData(alunoId);
             return Page();
+        }
+
+        public PartialViewResult OnGetNotaPartial(int alunoId)
+        {
+            Notas = _notaService.GetAllNotas(alunoId);
+            return Partial("_NotaPartial", Notas);
         }
     }
 
