@@ -5,6 +5,10 @@
     Layout = "~/Pages/Shared/_LayoutLogado.cshtml";
 }
 
+<head>
+    <link rel="stylesheet" href="~/css/notas.css" />
+</head>
+
 <div class="container">
     <h2 class="text-center">@ViewData["Title"]</h2>
 
@@ -21,7 +25,7 @@
             </div>
             <div class="col-md-3">
                 <label>Serie:</label>
-                <input type="text" name="Serie" class="form-control" value="@Model.Serie" readonly />
+                <input type="text" name="Serie" id="serieInput" class="form-control" value="@Model.Serie" readonly />
             </div>
             <div class="col-md-4">
                 <label>Aluno:</label>
@@ -72,6 +76,7 @@
                 <th>Matéria</th>
                 <th>Período</th>
                 <th>Nota</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -85,7 +90,13 @@
                         <td>@nota.Aluno.Nome</td>
                         <td>@nota.Disciplina.Nome</td>
                         <td>@nota.Periodo</td>
-                        <td>@nota.NotaValor</td>
+                        <td>@nota.NotaValor</td><td>
+                        <form id="deleteForm-@nota.NotaID" method="post" asp-action="DeleteNota" asp-route-id="@nota.NotaID" style="display:inline;">
+                            <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(@nota.NotaID, @nota.AlunoID)">
+                                X
+                            </button>
+                        </form>
+                    </td>
                     </tr>
                 }
             }
@@ -102,13 +113,33 @@
 </div>
 
 @section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+    function confirmDelete(notaId, alunoId) {
+            Swal.fire({
+                title: 'Tem certeza?',
+                text: "Esta ação é irreversível. Deseja realmente excluir?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim, excluir!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Submete o formulário de exclusão
+                    document.getElementById(`deleteForm-${notaId, alunoId}`).submit();
+                }
+            })
+        }    
+    </script>
     <script>
         $(document).ready(function () {
             $('#alunoSelect').on('change', function () {
                 var alunoId = $(this).val();
                 if (alunoId) {
                     $.ajax({
-                        url: '/Notas/GetSeriePorAluno',
+                        url: '@Url.Page("Index", new { handler = "Get" })', 
                         type: 'GET',
                         data: { alunoId: alunoId },
                         success: function (data) {

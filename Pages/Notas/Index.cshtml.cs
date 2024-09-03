@@ -42,7 +42,6 @@ namespace ELLPScore.Pages.Notas
 
         public void RefreshData(int? alunoId = null)
         {
-            Notas = _notaService.GetAllNotas((alunoId.HasValue ? alunoId.Value : 0)) ?? new List<Nota>();
             Disciplinas = new SelectList(_disciplinaService.GetAllDisciplinas(), "DisciplinaID", "Nome");
             Turmas = new SelectList(_turmaService.GetAllTurmas(), "TurmaID", "CodigoOuNome");
             Alunos = new SelectList(_alunoService.GetAllAlunos(), "AlunoID", "Nome");
@@ -52,12 +51,14 @@ namespace ELLPScore.Pages.Notas
                 AlunoSelecionadoId = alunoId.Value;
                 var aluno = _alunoService.GetAlunoById(AlunoSelecionadoId);
                 Serie = aluno?.Serie ?? string.Empty;
+                Notas = _notaService.GetAllNotas(AlunoSelecionadoId) ?? new List<Nota>();
             }
             else if (Alunos.Any())
             {
                 AlunoSelecionadoId = int.Parse(Alunos.First().Value);
                 var aluno = _alunoService.GetAlunoById(AlunoSelecionadoId);
                 Serie = aluno?.Serie ?? string.Empty;
+                Notas = _notaService.GetAllNotas(AlunoSelecionadoId) ?? new List<Nota>();
             }
         }
 
@@ -86,7 +87,7 @@ namespace ELLPScore.Pages.Notas
             if (!string.IsNullOrEmpty(erro))
             {
                 ModelState.AddModelError(string.Empty, erro);
-                RefreshData();
+                RefreshData(input.AlunoID);
                 return Page();
             }
 
@@ -107,7 +108,7 @@ namespace ELLPScore.Pages.Notas
                 ModelState.AddModelError(string.Empty, erro);
             }
 
-            RefreshData();
+            RefreshData(input.AlunoID);
             return Page();
         }
 
@@ -116,10 +117,22 @@ namespace ELLPScore.Pages.Notas
             var aluno = _alunoService.GetAllAlunos().FirstOrDefault(a => a.AlunoID == alunoId);
             if (aluno != null)
             {
+                RefreshData(alunoId);
                 return new JsonResult(aluno.Serie);
             }
-
+            RefreshData(alunoId);
             return new JsonResult(string.Empty);
+        }
+
+        public IActionResult OnPostDeleteNotaAsync(int id, int alunoId)
+        {
+            if(!_notaService.ExcluirNota(id, out string erro))
+            {
+                ModelState.AddModelError(string.Empty, erro);
+
+            }
+            RefreshData(alunoId);
+            return Page();
         }
     }
 

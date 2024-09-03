@@ -30,7 +30,7 @@ namespace ELLPScore.Services
                     .Include(n => n.Aluno)
                     .Include(n => n.Disciplina)
                     .Include(n => n.Turma)
-                    .Where(n => n.NotaID == id)
+                    .Where(n => n.AlunoID == id)
                     .ToList();
             }
 
