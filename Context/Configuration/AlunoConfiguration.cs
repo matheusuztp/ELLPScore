@@ -14,6 +14,7 @@
             builder.Property(a => a.CPF).IsRequired().HasMaxLength(11);
             builder.Property(a => a.Email).HasMaxLength(255);
             builder.Property(a => a.Matricula).HasMaxLength(50);
+            builder.Property(a => a.Serie).HasMaxLength(50);
 
             builder.HasMany(a => a.AlunoDisciplinas)
                    .WithOne(ad => ad.Aluno)
@@ -26,10 +27,6 @@
             builder.HasMany(a => a.Feedbacks)
                    .WithOne(f => f.Aluno)
                    .HasForeignKey(f => f.AlunoID);
-
-            builder.HasMany(a => a.TurmaAlunos)
-                   .WithOne(ta => ta.Aluno)
-                   .HasForeignKey(ta => ta.AlunoID);
         }
     }
 

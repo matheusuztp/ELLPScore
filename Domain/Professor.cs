@@ -7,6 +7,8 @@ namespace ELLPScore.Domain
         public string Nome { get; set; }
         public string Email { get; set; }
 
+        public bool IsAdmin { get; set; }
+
         public ICollection<Feedback> Feedbacks { get; set; }
         public ICollection<Turma> Turmas { get; set; }
     }

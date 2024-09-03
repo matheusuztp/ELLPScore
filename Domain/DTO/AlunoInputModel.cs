@@ -4,6 +4,8 @@ namespace ELLPScore.Domain.DTO
 {
     public class AlunoInputModel
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "O nome é obrigatório.")]
         [StringLength(255, ErrorMessage = "O nome não pode exceder 255 caracteres.")]
         public string Nome { get; set; }
@@ -20,6 +22,8 @@ namespace ELLPScore.Domain.DTO
         [StringLength(50, ErrorMessage = "A matrícula não pode exceder 50 caracteres.")]
         public string Matricula { get; set; }
 
+        [Required(ErrorMessage = "A serie é obrigatória.")]
+        [StringLength(50, ErrorMessage = "A serie não pode exceder 50 caracteres.")]
         public string Serie { get; set; }
 
         [Range(1, 120, ErrorMessage = "A idade deve ser um número inteiro entre 1 e 120.")]
@@ -29,8 +33,6 @@ namespace ELLPScore.Domain.DTO
         public string Anotacoes { get; set; }
 
         [Required(ErrorMessage = "Pelo menos uma turma deve ser selecionada.")]
-        public List<int> TurmaIds { get; set; } 
-
-        public IList<Turma> Turmas { get; set; }
+        public int TurmaId { get; set; } 
     }
 }

@@ -1,0 +1,123 @@
+﻿@page
+@model Notas.IndexModel
+@{
+    ViewData["Title"] = "Registrar Notas";
+    Layout = "~/Pages/Shared/_LayoutLogado.cshtml";
+}
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+
+    <form id="notaForm" method="post">
+        <div class="row">
+            <div class="col-md-3">
+                <label>Turma:</label>
+                <select name="TurmaID" class="form-control">
+                    @foreach (var turma in Model.Turmas)
+                    {
+                        <option value="@turma.Value">@turma.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label>Serie:</label>
+                <input type="text" name="Serie" class="form-control" value="@Model.Serie" readonly />
+            </div>
+            <div class="col-md-3">
+                <label>Aluno:</label>
+                <select name="AlunoID" id="alunoSelect" class="form-control">
+                    @foreach (var aluno in Model.Alunos)
+                    {
+                        var isSelected = aluno.Value == Model.AlunoSelecionadoId.ToString() ? "selected" : "";
+                        <option value="@aluno.Value" isSelected>@aluno.Text</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-3">
+                <label>Matéria:</label>
+                <select name="DisciplinaID" class="form-control">
+                    @foreach (var disciplina in Model.Disciplinas)
+                    {
+                        <option value="@disciplina.Value">@disciplina.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label>Período:</label>
+                <input type="text" name="Periodo" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label>Nota:</label>
+                <input type="text" name="ValorNota" class="form-control" />
+            </div>
+        </div>
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+    </form>
+
+    <table class="table table-bordered mt-5" id="notasTable">
+        <thead>
+            <tr>
+                <th>Turma</th>
+                <th>Série</th>
+                <th>Nome do Aluno</th>
+                <th>Matéria</th>
+                <th>Período</th>
+                <th>Nota</th>
+            </tr>
+        </thead>
+        <tbody>
+            @await Html.PartialAsync("_NotasTablePartial", new { alunoId = Model.AlunoSelecionadoId })
+        </tbody>
+    </table>
+</div>
+    
+</div>
+
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#alunoSelect').on('change', function () {
+                var alunoId = $(this).val();
+                if (alunoId) {
+                    $.ajax({
+                        url: '/Notas/GetSeriePorAluno',
+                        type: 'GET',
+                        data: { alunoId: alunoId },
+                        success: function (data) {
+                            $('#serieInput').val(data);
+                        },
+                        error: function () {
+                            alert('Erro ao buscar a série do aluno.');
+                        }
+                    });
+                } else {
+                    $('#serieInput').val('');
+                }
+            });
+
+            $("#notaForm").on("submit", function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Page("Notas/Index")",
+                    data: $(this).serialize(),
+                    success: function () {
+                        // Carregar as notas atualizadas para o aluno selecionado
+                        $("#notasTable tbody").load("/Notas/_NotasTablePartial/" + $("#alunoSelect").val());
+                        // Limpa o formulário após o sucesso
+                        $("#notaForm")[0].reset();
+                    },
+                    error: function () {
+                        alert("Erro ao salvar a nota. Tente novamente.");
+                    }
+                });
+            });
+        });
+    </script>
+}

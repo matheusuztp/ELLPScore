@@ -1,8 +1,8 @@
 using ELLPScore.Domain;
 using ELLPScore.Domain.DTO;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ELLPScore.Pages.Professores
 {
@@ -15,40 +15,33 @@ namespace ELLPScore.Pages.Professores
             _professorService = professorService;
         }
 
-        [BindProperty]
-        public ProfessorInputModel Professor { get; set; }
-
         public IList<Professor> Professores { get; set; }
 
-        public async Task OnGetAsync()
+        public void OnGetAsync()
         {
-            Professores = await _professorService.GetAllProfessorAsync();
+            Professores = _professorService.GetAllProfessoresAsync().GetAwaiter().GetResult();
         }
 
-        public async Task<IActionResult> OnPostCadastrarProfessorAsync()
+        public IActionResult OnPostDelete(int id)
         {
-            if (!ModelState.IsValid)
+            var professor = _professorService.GetAllProfessoresAsync().GetAwaiter().GetResult().FirstOrDefault(t => t.Id == id);
+
+            if (professor == null)
             {
-                Professores = await _professorService.GetAllProfessorAsync(); // Recarrega os alunos para exibir novamente na página
                 return Page();
             }
 
-            var professor = new Professor { UserName = Professor.Email, Email = Professor.Email, Nome = Professor.Nome, EmailConfirmed = true, NormalizedEmail = Professor.Email };
-            
+            var success = _professorService.ExcluirProfessorAsync(professor);
 
-            var result = await _professorService.CadastrarProfessorAsync(professor, Professor.Password);
-
-            foreach (var error in result.Errors)
+            if (!success.IsCompleted)
             {
-                ModelState.AddModelError(string.Empty, error.Description);
+                ModelState.AddModelError(string.Empty, "Erro ao excluir professor");
+                return Page();
             }
 
-            return RedirectToPage();
+            Professores = _professorService.GetAllProfessoresAsync().GetAwaiter().GetResult();
+            return Page();
         }
 
-        public async Task<IActionResult> OnGetCadastrarProfessorPartial()
-        {
-            return RedirectToPage("_CadastrarProfessorPartial", new ProfessorInputModel());
-        }
     }
 }

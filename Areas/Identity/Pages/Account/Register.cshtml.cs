@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ELLPScore.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace ELLPScore.Areas.Identity.Pages.Account
 {
@@ -59,6 +60,10 @@ namespace ELLPScore.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var professor = new Professor { UserName = Input.Email, Email = Input.Email, Nome = Input.Nome, EmailConfirmed = true, NormalizedEmail = Input.Email };
+             
+                if(_userManager.Users.ToListAsync().GetAwaiter().GetResult().Count == 0)
+                    professor.IsAdmin = true;
+                
                 var result = await _userManager.CreateAsync(professor, Input.Password);
 
                 if (result.Succeeded)

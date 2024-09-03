@@ -18,47 +18,31 @@ namespace ELLPScore.Pages.Alunos
         public AlunoInputModel Aluno { get; set; }
 
         public IList<Aluno> Alunos { get; set; }
-        public IList<Turma> Turmas { get; set; }
 
-        public async Task OnGetAsync()
+        public void OnGetAsync()
         {
-            Alunos = await _alunoService.GetAllAlunosAsync();
-            Turmas = _alunoService.GetAllTurmas();
+            Alunos = _alunoService.GetAllAlunos();
         }
 
-        public async Task<IActionResult> OnPostCadastrarAlunoAsync()
+        public IActionResult OnPostDelete(int id)
         {
-            if (!ModelState.IsValid)
+            var aluno = _alunoService.GetAllAlunos().FirstOrDefault(t => t.AlunoID == id);
+
+            if (aluno == null)
             {
-                Alunos = await _alunoService.GetAllAlunosAsync(); // Recarrega os alunos para exibir novamente na página
-                Turmas = _alunoService.GetAllTurmas();            // Recarrega as turmas para exibir novamente na página
                 return Page();
             }
 
-            var novoAluno = new Aluno
-            {
-                Nome = Aluno.Nome,
-                Email = Aluno.Email,
-                Serie = Aluno.Serie,
-                CPF = Aluno.CPF,
-                Idade = Aluno.Idade,
-                Matricula = Aluno.Matricula,
-                Anotacoes = Aluno.Anotacoes,
-                TurmaAlunos = new List<TurmaAluno>()
-            };
+            var success = _alunoService.ExcluirAluno(id, out var erro);
 
-            foreach (var turmaId in Aluno.TurmaIds)
+            if (!success)
             {
-                novoAluno.TurmaAlunos.Add(new TurmaAluno { Aluno = novoAluno, TurmaID = turmaId });
+                ModelState.AddModelError(string.Empty, erro);
+                return Page();
             }
 
-            await _alunoService.CadastrarAlunoAsync(novoAluno);
-            return RedirectToPage();
-        }
-
-        public async Task<IActionResult> OnGetCadastrarAlunoPartial()
-        {
-            return RedirectToPage("_CadastrarAlunoPartial", new AlunoInputModel() { Turmas = this.Turmas });
+            Alunos = _alunoService.GetAllAlunos();
+            return Page();
         }
     }
 }

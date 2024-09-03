@@ -2,6 +2,7 @@ using ELLPScore.Domain;
 using ELLPScore.Domain.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ELLPScore.Pages.Disciplinas
 {
@@ -9,38 +10,40 @@ namespace ELLPScore.Pages.Disciplinas
     {
         private readonly IDisciplinaService _disciplinaService;
 
-        public IndexModel(IDisciplinaService DisciplinaService)
+        public IndexModel(IDisciplinaService disciplinaService)
         {
-            _disciplinaService = DisciplinaService;
+            _disciplinaService = disciplinaService;
         }
 
-        [BindProperty]
-        public DisciplinaInputModel Disciplina { get; set; }
+        
 
         public IList<Disciplina> Disciplinas { get; set; }
 
-        public async Task OnGetAsync()
+        public void OnGetAsync()
         {
-            Disciplinas = await _disciplinaService.GetAllDisciplinaAsync();
+            Disciplinas = _disciplinaService.GetAllDisciplinas();
         }
 
-        public async Task<IActionResult> OnPostCadastrarDisciplinaAsync()
+        public IActionResult OnPostDelete(int id)
         {
-            if (!ModelState.IsValid)
+            var disciplina = _disciplinaService.GetAllDisciplinas().FirstOrDefault(t => t.DisciplinaID == id);
+
+            if (disciplina == null)
             {
-                Disciplinas = await _disciplinaService.GetAllDisciplinaAsync(); // Recarrega os Disciplinas para exibir novamente na página
                 return Page();
             }
 
-            var novoDisciplina = new Disciplina { Nome = Disciplina.Nome };
+            var success = _disciplinaService.ExcluirDisciplina(disciplina.DisciplinaID, out string erro);
 
-            await _disciplinaService.CadastrardisciplinaAsync(novoDisciplina);
-            return RedirectToPage();
+            if (!success)
+            {
+                ModelState.AddModelError(string.Empty, erro);
+                return Page();
+            }
+
+            Disciplinas = _disciplinaService.GetAllDisciplinas();
+            return Page();
         }
 
-        public async Task<IActionResult> OnGetCadastrarDisciplinaPartial()
-        {
-            return RedirectToPage("_CadastrarDisciplinaPartial", new DisciplinaInputModel());
-        }
     }
 }

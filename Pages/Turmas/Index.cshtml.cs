@@ -9,50 +9,42 @@ namespace ELLPScore.Pages.Turmas
     public class IndexModel : PageModel
     {
         private readonly ITurmaService _turmaService;
-        private readonly IProfessorService _professorService;
 
-        public IndexModel(ITurmaService turmaService, IProfessorService professorService)
+        public IndexModel(ITurmaService turmaService)
         {
             _turmaService = turmaService;
-            _professorService = professorService;
         }
 
         [BindProperty]
         public TurmaInputModel Turma { get; set; }
 
         public IList<Turma> Turmas { get; set; }
-        public IList<Professor> Professores { get; set; }
 
         public void OnGetAsync()
         {
             Turmas = _turmaService.GetAllTurmas();
-            Professores = _professorService.GetAllProfessorAsync().GetAwaiter().GetResult();
-            ViewData["Professores"] = new SelectList(Professores, "Id", "Nome");
         }
 
-        public async Task<IActionResult> OnPostCadastrarTurmaAsync()
+        public IActionResult OnPostDelete(int id)
         {
-            if (!ModelState.IsValid)
+            var turma = _turmaService.GetAllTurmas().FirstOrDefault(t => t.TurmaID == id);
+
+            if (turma == null)
             {
-                Turmas = _turmaService.GetAllTurmas(); // Recarrega as turmas para exibir novamente na página
-                Professores = _professorService.GetAllProfessorAsync().GetAwaiter().GetResult();
-                ViewData["Professores"] = new SelectList(Professores, "Id", "Nome");
                 return Page();
             }
 
-            var novaTurma = new Turma
+            var success = _turmaService.ExcluirTurma(id, out var erro);
+
+            if (!success)
             {
-                CodigoOuNome = Turma.CodigoOuNome,
-                ProfessorID = Turma.ProfessorID
-            };
+                ModelState.AddModelError(string.Empty, erro);
+                return Page();
+            }
 
-            await _turmaService.CadastrarTurmaAsync(novaTurma);
-            return RedirectToPage();
+            Turmas = _turmaService.GetAllTurmas();
+            return Page();
         }
 
-        public async Task<IActionResult> OnGetCadastrarTurmaPartial()
-        {
-            return RedirectToPage("_CadastrarTurmaPartial", new TurmaInputModel());
-        }
     }
 }

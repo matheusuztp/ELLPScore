@@ -9,7 +9,7 @@
         public Professor Professor { get; set; }
 
         public ICollection<Nota> Notas { get; set; }
-        public ICollection<TurmaAluno> TurmaAlunos { get; set; }
+        public ICollection<Aluno> Alunos { get; set; }
         public ICollection<TurmaDisciplina> TurmaDisciplinas { get; set; }
     }
 

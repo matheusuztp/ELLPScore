@@ -20,7 +20,6 @@ namespace ELLPScore.Context.DB
         public DbSet<Nota> Notas { get; set; }
         public DbSet<Professor> Professores { get; set; }
         public DbSet<Turma> Turmas { get; set; }
-        public DbSet<TurmaAluno> TurmaAlunos { get; set; }
         public DbSet<TurmaDisciplina> TurmaDisciplinas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -32,7 +31,6 @@ namespace ELLPScore.Context.DB
             modelBuilder.ApplyConfiguration(new NotaConfiguration());
             modelBuilder.ApplyConfiguration(new ProfessorConfiguration());
             modelBuilder.ApplyConfiguration(new TurmaConfiguration());
-            modelBuilder.ApplyConfiguration(new TurmaAlunoConfiguration());
             modelBuilder.ApplyConfiguration(new TurmaDisciplinaConfiguration());
 
             base.OnModelCreating(modelBuilder);

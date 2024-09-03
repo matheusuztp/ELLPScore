@@ -6,7 +6,9 @@ using Microsoft.EntityFrameworkCore;
 public interface ITurmaService
 {
     IList<Turma> GetAllTurmas();
-    Task CadastrarTurmaAsync(Turma turma);
+    bool CadastrarTurma(Turma turma, out string erro);
+    bool AtualizarTurma(Turma turma, out string erro);
+    bool ExcluirTurma(int id, out string erro);
     Task<IList<Professor>> GetAllProfessoresAsync();
 }
 
@@ -33,10 +35,78 @@ public class TurmaService : ITurmaService
         return turmas;
     }
 
-    public async Task CadastrarTurmaAsync(Turma turma)
+    public bool CadastrarTurma(Turma turma, out string erro)
     {
-        _context.Turmas.Add(turma);
-        await _context.SaveChangesAsync();
+        erro = string.Empty;
+        try
+        {
+            var turmaJaExiste = _context.Turmas.Any(t => t.CodigoOuNome == turma.CodigoOuNome
+                                                             && t.ProfessorID == turma.ProfessorID);
+
+            if (turmaJaExiste)
+            {
+                erro = "Turma já cadastrada.";
+                return false;
+            }
+
+            _context.Turmas.Add(turma);
+            _context.SaveChanges();
+            return true;
+
+        }
+        catch (Exception ex)
+        {
+            erro = ex.Message;
+            return false;
+        }
+    }
+
+    public bool AtualizarTurma(Turma turma, out string erro)
+    {
+        erro = string.Empty;
+        try
+        {
+            var turmaJaExiste = _context.Turmas.Any(t => t.CodigoOuNome == turma.CodigoOuNome
+                                                             && t.ProfessorID == turma.ProfessorID);
+
+            if (turmaJaExiste)
+            {
+                erro = "Turma já cadastrada.";
+                return false;
+            }
+
+            _context.Turmas.Update(turma);
+            _context.SaveChanges();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            erro = ex.Message;
+            return false;
+        }
+    }
+
+    public bool ExcluirTurma(int id, out string erro)
+    {
+        erro = string.Empty;
+        try
+        {
+            var turma = _context.Turmas.Find(id);
+            if (turma == null)
+            {
+                erro = "Turma não encontrada.";
+                return false;
+            }
+
+            _context.Turmas.Remove(turma);
+            _context.SaveChanges();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            erro = ex.Message;
+            return false;
+        }
     }
 
     public async Task<IList<Professor>> GetAllProfessoresAsync()

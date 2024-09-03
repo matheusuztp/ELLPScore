@@ -1,0 +1,48 @@
+﻿/* Centraliza o formulário no centro da tela */
+.centered-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh; /* Ajusta a altura para centralizar verticalmente */
+}
+
+.centered-form-card {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+    /* Estilo adicional para o botão */
+    .centered-form-card button {
+        width: 25%;
+        padding: 10px;
+    }
+
+    /* Ajuste de títulos e labels */
+    .centered-form-card h3 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .centered-form-card label {
+        font-weight: 500;
+    }
+
+    /* Ajuste de mensagens de validação */
+    .centered-form-card .text-danger {
+        font-size: 0.875rem;
+    }
+
+/* Estilo responsivo */
+@media (max-width: 768px) {
+    .centered-form-container {
+        height: auto; /* Ajusta a altura para telas menores */
+    }
+
+    .centered-form-card {
+        padding: 15px;
+    }
+}

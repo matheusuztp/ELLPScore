@@ -61,11 +61,12 @@ namespace ELLPScore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Turma")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("TurmaID")
+                        .HasColumnType("int");
 
                     b.HasKey("AlunoID");
+
+                    b.HasIndex("TurmaID");
 
                     b.ToTable("Alunos");
                 });
@@ -189,6 +190,9 @@ namespace ELLPScore.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -261,21 +265,6 @@ namespace ELLPScore.Migrations
                     b.HasIndex("ProfessorID");
 
                     b.ToTable("Turmas");
-                });
-
-            modelBuilder.Entity("ELLPScore.Domain.TurmaAluno", b =>
-                {
-                    b.Property<int>("TurmaID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AlunoID")
-                        .HasColumnType("int");
-
-                    b.HasKey("TurmaID", "AlunoID");
-
-                    b.HasIndex("AlunoID");
-
-                    b.ToTable("TurmaAlunos");
                 });
 
             modelBuilder.Entity("ELLPScore.Domain.TurmaDisciplina", b =>
@@ -430,6 +419,17 @@ namespace ELLPScore.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ELLPScore.Domain.Aluno", b =>
+                {
+                    b.HasOne("ELLPScore.Domain.Turma", "Turma")
+                        .WithMany("Alunos")
+                        .HasForeignKey("TurmaID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Turma");
+                });
+
             modelBuilder.Entity("ELLPScore.Domain.AlunoDisciplina", b =>
                 {
                     b.HasOne("ELLPScore.Domain.Aluno", "Aluno")
@@ -492,25 +492,6 @@ namespace ELLPScore.Migrations
                         .HasForeignKey("ProfessorID");
 
                     b.Navigation("Professor");
-                });
-
-            modelBuilder.Entity("ELLPScore.Domain.TurmaAluno", b =>
-                {
-                    b.HasOne("ELLPScore.Domain.Aluno", "Aluno")
-                        .WithMany("TurmaAlunos")
-                        .HasForeignKey("AlunoID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ELLPScore.Domain.Turma", "Turma")
-                        .WithMany("TurmaAlunos")
-                        .HasForeignKey("TurmaID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Aluno");
-
-                    b.Navigation("Turma");
                 });
 
             modelBuilder.Entity("ELLPScore.Domain.TurmaDisciplina", b =>
@@ -590,8 +571,6 @@ namespace ELLPScore.Migrations
                     b.Navigation("Feedbacks");
 
                     b.Navigation("Notas");
-
-                    b.Navigation("TurmaAlunos");
                 });
 
             modelBuilder.Entity("ELLPScore.Domain.Disciplina", b =>
@@ -612,9 +591,9 @@ namespace ELLPScore.Migrations
 
             modelBuilder.Entity("ELLPScore.Domain.Turma", b =>
                 {
-                    b.Navigation("Notas");
+                    b.Navigation("Alunos");
 
-                    b.Navigation("TurmaAlunos");
+                    b.Navigation("Notas");
 
                     b.Navigation("TurmaDisciplinas");
                 });

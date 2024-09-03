@@ -3,7 +3,9 @@
 namespace ELLPScore.Domain.DTO
 {
     public class TurmaInputModel
-    {
+    { 
+        public int TurmaID { get; set; }
+
         [Required(ErrorMessage = "O código/nome é obrigatório.")]
         [StringLength(50, ErrorMessage = "O nome não pode exceder 50 caracteres.")]
         public string CodigoOuNome { get; set; }

@@ -4,6 +4,7 @@ namespace ELLPScore.Domain.DTO
 {
     public class ProfessorInputModel
     {
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
         [StringLength(100, ErrorMessage = "O {0} deve ter pelo menos {2} e no máximo {1} caracteres.", MinimumLength = 3)]
@@ -26,6 +27,8 @@ namespace ELLPScore.Domain.DTO
         [Display(Name = "Confirmar Senha")]
         [Compare("Password", ErrorMessage = "As senhas não coincidem.")]
         public string ConfirmPassword { get; set; }
-        
+
+        public bool IsAdmin { get; set; }
+
     }
 }

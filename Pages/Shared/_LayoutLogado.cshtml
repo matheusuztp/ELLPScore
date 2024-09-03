@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-    <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 <body>
     <div class="wrapper">
@@ -18,7 +18,7 @@
             <ul class="nav flex-column">
                 <!-- Sidebar Links -->
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="/" class="nav-link">
                         <div class="icon-wrapper">
                             <i class="fas fa-house"></i>
                         </div>
@@ -26,7 +26,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/Notas" class="nav-link">
                         <div class="icon-wrapper">
                             <i class="fas fa-star"></i>
                         </div>
@@ -99,7 +99,7 @@
 
 
             <li class="nav-item" style="margin-top:auto">
-                <a href="~/Identity/Account/Logout" class="nav-link">
+                <a href="~/Identity/Account/Logout/Index" class="nav-link">
                     <div class="icon-wrapper">
                         <i class="fas fa-sign-out-alt"></i>
                     </div>
@@ -122,6 +122,8 @@
     <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>

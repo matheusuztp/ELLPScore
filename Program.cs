@@ -1,8 +1,10 @@
 using ELLPScore.Context.DB;
 using ELLPScore.Domain;
 using ELLPScore.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System.Globalization;
 
@@ -47,7 +49,7 @@ builder.Services.AddTransient<IAlunoService, AlunoService>();
 builder.Services.AddTransient<ITurmaService, TurmaService>();
 builder.Services.AddTransient<IDisciplinaService, DisciplinaService>();
 builder.Services.AddTransient<IProfessorService, ProfessorService>();
-
+builder.Services.AddTransient<INotaService, NotaService>();
 
 var app = builder.Build();
 

@@ -11,10 +11,12 @@
         public string Anotacoes { get; set; }
         public string Email { get; set; }
 
+        public int TurmaID { get; set; }
+        public virtual Turma Turma { get; set; }
+
         public ICollection<AlunoDisciplina> AlunoDisciplinas { get; set; }
         public ICollection<Nota> Notas { get; set; }
         public ICollection<Feedback> Feedbacks { get; set; }
-        public ICollection<TurmaAluno> TurmaAlunos { get; set; }
     }
 
 }

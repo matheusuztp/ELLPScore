@@ -18,10 +18,6 @@ public class TurmaConfiguration : IEntityTypeConfiguration<Turma>
                .WithOne(n => n.Turma)
                .HasForeignKey(n => n.TurmaID);
 
-        builder.HasMany(t => t.TurmaAlunos)
-               .WithOne(ta => ta.Turma)
-               .HasForeignKey(ta => ta.TurmaID);
-
         builder.HasMany(t => t.TurmaDisciplinas)
                .WithOne(td => td.Turma)
                .HasForeignKey(td => td.TurmaID);
