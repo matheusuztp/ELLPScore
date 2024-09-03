@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "iWxcGvoC0FZd7gY5h66/tv/sj9EehXsErCo400dzPTw=",
+  "Hash": "G0pbikJotvaGUxpNNFnUoUVqD/ekSQltK7rkQhPJ+Xk=",
   "Source": "ELLPScore",
   "BasePath": "_content/ELLPScore",
   "Mode": "Default",
@@ -167,6 +167,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\login.css"
+    },
+    {
+      "Identity": "C:\\ELLPScore\\ELLPScore\\wwwroot\\css\\notas.css",
+      "SourceId": "ELLPScore",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\ELLPScore\\ELLPScore\\wwwroot\\",
+      "BasePath": "_content/ELLPScore",
+      "RelativePath": "css/notas.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\notas.css"
     },
     {
       "Identity": "C:\\ELLPScore\\ELLPScore\\wwwroot\\css\\registerConfirmed.css",

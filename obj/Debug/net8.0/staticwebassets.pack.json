@@ -29,6 +29,10 @@
       "PackagePath": "staticwebassets\\css\\login.css"
     },
     {
+      "Id": "C:\\ELLPScore\\ELLPScore\\wwwroot\\css\\notas.css",
+      "PackagePath": "staticwebassets\\css\\notas.css"
+    },
+    {
       "Id": "C:\\ELLPScore\\ELLPScore\\wwwroot\\css\\registerConfirmed.css",
       "PackagePath": "staticwebassets\\css\\registerConfirmed.css"
     },

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using ELLPScore.Services;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 
 namespace ELLPScore.Pages.Notas
 {
@@ -23,6 +24,7 @@ namespace ELLPScore.Pages.Notas
             _turmaService = turmaService;
             _alunoService = alunoService;
         }
+
 
         public IList<Nota> Notas { get; set; }
         public SelectList Disciplinas { get; set; }
@@ -72,7 +74,16 @@ namespace ELLPScore.Pages.Notas
             if(input.TurmaID == 0)
                 erro += "Turma deve estar selecionada." + Environment.NewLine;
 
-            if(!string.IsNullOrEmpty(erro))
+            decimal valorNota = 0;
+            if (input.ValorNota.Contains('.'))
+                valorNota = decimal.Parse(input.ValorNota.Replace('.', ','));
+
+            if(valorNota > 100 || valorNota < 0)
+            {
+                erro += "Nota deve estar entre 0 e 100." + Environment.NewLine;
+            }
+
+            if (!string.IsNullOrEmpty(erro))
             {
                 ModelState.AddModelError(string.Empty, erro);
                 RefreshData();
@@ -85,15 +96,18 @@ namespace ELLPScore.Pages.Notas
                 DisciplinaID = input.DisciplinaID,
                 TurmaID = input.TurmaID,
                 Periodo = input.Periodo,
-                NotaValor = input.ValorNota,
+                NotaValor = valorNota,
                 Serie = input.Serie
 
             };
 
             if (!_notaService.CadastrarNota(nota, out string erroCad))
+            {
                 erro += Environment.NewLine + erroCad;
+                ModelState.AddModelError(string.Empty, erro);
+            }
 
-            ModelState.AddModelError(string.Empty, erro);
+            RefreshData();
             return Page();
         }
 
@@ -118,9 +132,8 @@ namespace ELLPScore.Pages.Notas
         [StringLength(50, ErrorMessage = "O período não pode exceder 50 caracteres.")]
         public string? Periodo { get; set; }
 
-        [Range(1.0, 120.0, ErrorMessage = "A nota deve ser um número entre 0 e 100.")]
         [Required(ErrorMessage = "A nota é obrigatória.")]
-        public decimal ValorNota { get; set; }
+        public string ValorNota { get; set; }
 
         [Required(ErrorMessage = "A serie é obrigatória.")]
         public string Serie { get; set; }

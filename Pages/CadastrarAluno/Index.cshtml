@@ -55,7 +55,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label asp-for="AlunoInput.Matricula"></label>
+                        <label asp-for="AlunoInput.TurmaId">Turma</label>
                         <select asp-for="AlunoInput.TurmaId" class="form-control" asp-items="@((SelectList)ViewData["Dados"])">
                         </select>
                         <span asp-validation-for="AlunoInput.TurmaId" class="text-danger"></span>
