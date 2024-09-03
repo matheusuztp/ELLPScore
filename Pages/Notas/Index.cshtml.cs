@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using ELLPScore.Services;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using System.ComponentModel.DataAnnotations;
 
 namespace ELLPScore.Pages.Notas
 {
@@ -34,6 +35,11 @@ namespace ELLPScore.Pages.Notas
 
         public void OnGet(int? alunoId = null)
         {
+            RefreshData(alunoId);
+        }
+
+        public void RefreshData(int? alunoId = null)
+        {
             Notas = _notaService.GetAllNotas((alunoId.HasValue ? alunoId.Value : 0)) ?? new List<Nota>();
             Disciplinas = new SelectList(_disciplinaService.GetAllDisciplinas(), "DisciplinaID", "Nome");
             Turmas = new SelectList(_turmaService.GetAllTurmas(), "TurmaID", "CodigoOuNome");
@@ -55,7 +61,24 @@ namespace ELLPScore.Pages.Notas
 
         public IActionResult OnPost([FromForm] NotaInputModel input)
         {
-            // Suponha que NotaInputModel é um modelo que captura os campos do formulário
+            string erro = string.Empty;
+
+            if (input.AlunoID == 0)
+                erro += "Aluno deve estar selecionado." + Environment.NewLine;
+
+            if(input.DisciplinaID == 0)
+                erro += "Disciplina deve estar selecionada." + Environment.NewLine;
+
+            if(input.TurmaID == 0)
+                erro += "Turma deve estar selecionada." + Environment.NewLine;
+
+            if(!string.IsNullOrEmpty(erro))
+            {
+                ModelState.AddModelError(string.Empty, erro);
+                RefreshData();
+                return Page();
+            }
+
             var nota = new Nota
             {
                 AlunoID = input.AlunoID,
@@ -67,12 +90,11 @@ namespace ELLPScore.Pages.Notas
 
             };
 
-            if (_notaService.CadastrarNota(nota, out var erro))
-            {
-                return new JsonResult(new { success = true });
-            }
+            if (!_notaService.CadastrarNota(nota, out string erroCad))
+                erro += Environment.NewLine + erroCad;
 
-            return null; // Ou algum tipo de erro
+            ModelState.AddModelError(string.Empty, erro);
+            return Page();
         }
 
         public IActionResult OnGetGetSeriePorAluno(int alunoId)
@@ -92,8 +114,15 @@ namespace ELLPScore.Pages.Notas
         public int AlunoID { get; set; }
         public int DisciplinaID { get; set; }
         public int TurmaID { get; set; }
-        public string Periodo { get; set; }
+
+        [StringLength(50, ErrorMessage = "O período não pode exceder 50 caracteres.")]
+        public string? Periodo { get; set; }
+
+        [Range(1.0, 120.0, ErrorMessage = "A nota deve ser um número entre 0 e 100.")]
+        [Required(ErrorMessage = "A nota é obrigatória.")]
         public decimal ValorNota { get; set; }
+
+        [Required(ErrorMessage = "A serie é obrigatória.")]
         public string Serie { get; set; }
     }
 }

@@ -10,7 +10,8 @@ namespace ELLPScore.Context.Configuration
         {
             builder.HasKey(n => n.NotaID);
 
-            builder.Property(n => n.Serie).HasMaxLength(10);
+            builder.Property(n => n.Serie).HasMaxLength(50);
+            builder.Property(n => n.Periodo).HasMaxLength(20);
             builder.Property(n => n.NotaValor).HasColumnType("decimal(5,2)");
 
             builder.HasOne(n => n.Aluno)

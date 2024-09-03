@@ -17,143 +17,139 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ELLPScore
 build_property.RootNamespace = ELLPScore
-build_property.ProjectDir = C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\
+build_property.ProjectDir = C:\ELLPScore\ELLPScore\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore
+build_property.MSBuildProjectDirectory = C:\ELLPScore\ELLPScore
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Areas/Identity/Pages/Account/AccessDenied.cshtml]
+[C:/ELLPScore/ELLPScore/Areas/Identity/Pages/Account/AccessDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Areas/Identity/Pages/Account/ForgotPassword.cshtml]
+[C:/ELLPScore/ELLPScore/Areas/Identity/Pages/Account/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Areas/Identity/Pages/Account/ForgotPasswordConfirmation.cshtml]
+[C:/ELLPScore/ELLPScore/Areas/Identity/Pages/Account/ForgotPasswordConfirmation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxGb3Jnb3RQYXNzd29yZENvbmZpcm1hdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Areas/Identity/Pages/Account/Login.cshtml]
+[C:/ELLPScore/ELLPScore/Areas/Identity/Pages/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Areas/Identity/Pages/Account/Logout.cshtml]
+[C:/ELLPScore/ELLPScore/Areas/Identity/Pages/Account/Logout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Areas/Identity/Pages/Account/Register.cshtml]
+[C:/ELLPScore/ELLPScore/Areas/Identity/Pages/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Areas/Identity/Pages/Account/RegisterConfirmation.cshtml]
+[C:/ELLPScore/ELLPScore/Areas/Identity/Pages/Account/RegisterConfirmation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3RlckNvbmZpcm1hdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Areas/Identity/Pages/Account/ResetPassword.cshtml]
+[C:/ELLPScore/ELLPScore/Areas/Identity/Pages/Account/ResetPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZXNldFBhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Areas/Identity/Pages/Account/ResetPasswordConfirmation.cshtml]
+[C:/ELLPScore/ELLPScore/Areas/Identity/Pages/Account/ResetPasswordConfirmation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZXNldFBhc3N3b3JkQ29uZmlybWF0aW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+[C:/ELLPScore/ELLPScore/Areas/Identity/Pages/Account/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+[C:/ELLPScore/ELLPScore/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Areas/Identity/Pages/_ViewImports.cshtml]
+[C:/ELLPScore/ELLPScore/Areas/Identity/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Areas/Identity/Pages/_ViewStart.cshtml]
+[C:/ELLPScore/ELLPScore/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Pages/AlterarSenha/Index.cshtml]
+[C:/ELLPScore/ELLPScore/Pages/AlterarSenha/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWx0ZXJhclNlbmhhXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Pages/Alunos/Index.cshtml]
+[C:/ELLPScore/ELLPScore/Pages/Alunos/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWx1bm9zXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Pages/CadastrarAluno/Index.cshtml]
+[C:/ELLPScore/ELLPScore/Pages/CadastrarAluno/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FkYXN0cmFyQWx1bm9cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Pages/CadastrarDisciplina/Index.cshtml]
+[C:/ELLPScore/ELLPScore/Pages/CadastrarDisciplina/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FkYXN0cmFyRGlzY2lwbGluYVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Pages/CadastrarProfessor/Index.cshtml]
+[C:/ELLPScore/ELLPScore/Pages/CadastrarProfessor/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FkYXN0cmFyUHJvZmVzc29yXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Pages/CadastrarTurma/Index.cshtml]
+[C:/ELLPScore/ELLPScore/Pages/CadastrarTurma/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FkYXN0cmFyVHVybWFcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Pages/Disciplinas/Index.cshtml]
+[C:/ELLPScore/ELLPScore/Pages/Disciplinas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGlzY2lwbGluYXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Pages/Error.cshtml]
+[C:/ELLPScore/ELLPScore/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Pages/Index.cshtml]
+[C:/ELLPScore/ELLPScore/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Pages/Notas/Index.cshtml]
+[C:/ELLPScore/ELLPScore/Pages/Notas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTm90YXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Pages/Notas/_NotasTablePartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTm90YXNcX05vdGFzVGFibGVQYXJ0aWFsLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Pages/Privacy.cshtml]
+[C:/ELLPScore/ELLPScore/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Pages/Professores/Index.cshtml]
+[C:/ELLPScore/ELLPScore/Pages/Professores/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZmVzc29yZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Pages/Shared/_LoginPartial.cshtml]
+[C:/ELLPScore/ELLPScore/Pages/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[C:/ELLPScore/ELLPScore/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Pages/Turmas/Index.cshtml]
+[C:/ELLPScore/ELLPScore/Pages/Turmas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHVybWFzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Pages/_ViewImports.cshtml]
+[C:/ELLPScore/ELLPScore/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Pages/_ViewStart.cshtml]
+[C:/ELLPScore/ELLPScore/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Pages/Shared/_Layout.cshtml]
+[C:/ELLPScore/ELLPScore/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-t7s6zrqsa0
 
-[C:/Users/mathe/OneDrive/Área de Trabalho/ELLPScore/Pages/Shared/_LayoutLogado.cshtml]
+[C:/ELLPScore/ELLPScore/Pages/Shared/_LayoutLogado.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXRMb2dhZG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-2nucrv6ziv
