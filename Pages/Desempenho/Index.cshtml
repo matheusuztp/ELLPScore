@@ -5,16 +5,16 @@
     Layout = "~/Pages/Shared/_LayoutLogado.cshtml";
 }
 
-<div class="container mt-4">
+<div class="container mt-1">
     <h2>Verificar Desempenho</h2>
 
     <form method="get" id="gerarRelatorio" action="@Url.Page("Index", new { handler = "DesempenhoPorAluno" })">
         <div class="row">
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="alunoSelect">Selecione o Aluno:</label>
-                    <select id="alunoSelect" asp-for="AlunoSelecionado" class="form-control">
-                        @if(Model.Alunos.Count() == 0)
+                    <label>Aluno:</label>
+                    <select name="AlunoID" id="alunoSelect" class="form-control">
+                        @if (Model.Alunos.Count() == 0)
                         {
                             <option value="0">Não há alunos</option>
                         }
@@ -27,8 +27,9 @@
                 </div>
             </div>
             <button type="submit" style="
-                                        width: 10%;
+                                        width: 5%;
                                         margin-top: 10px;
+                                        height: 40px;
                                         margin-left: auto;"
                     class="btn btn-primary">
                 Filtrar
@@ -36,8 +37,21 @@
         </div>
     </form>
 
-    <div id="grid" class="mt-4">
-        <partial name="_DesempenhoPartial" model="@Model.DesempenhoDataModel" />
+    <div id="desempenhoContainer">
+        <div class="row">
+            <div class="col-md-6">
+                <div id="graficoDesempenhoMateria" style="height: 300px; width: 100%;"></div>
+            </div>
+            <div class="col-md-6">
+                <div id="graficoAlunosNotas" style="height: 300px; width: 100%;"></div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div id="graficoAprovacoes" style="height: 275px; width: 100%;"></div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -45,82 +59,71 @@
     <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-    $(document).ready(function() {
-        $('#gerarRelatorio').on('submit', function(event) {
-            event.preventDefault(); 
-            var form = $(this);
-            var url = form.attr('action') || '@Url.Page("Index", new { handler = "DesempenhoPorAluno" })';
 
-            $.ajax({
-                url: url,
-                type: 'GET',
-                data: form.serialize(), 
-                success: function(response) {
-                    $('#grid').html(response); 
-                    renderCharts();
-                },
-                error: function() {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Erro',
-                        text: 'Erro ao gerar o relatório.'
-                    });
-                }
+        $(document).ready(function () {
+            $('#gerarRelatorio').on('submit', function (event) {
+                event.preventDefault();
+                var alunoId = $('#alunoSelect').val();
+                $.ajax({
+                    url: '@Url.Page("Index", new { handler = "DesempenhoPorAluno" })',
+                    type: 'GET',
+                    data: { alunoId: alunoId },
+                    success: function (response) {
+                        renderCharts(response);
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Erro',
+                            text: 'Erro ao atualizar o desempenho.'
+                        });
+                    }
+                });
             });
         });
-    });
 
-    function renderCharts() {
-        if (document.getElementById('graficoDesempenhoMateria')) {
-            var chartMateria = new CanvasJS.Chart("graficoDesempenhoMateria", {
-                theme: "light2",
-                title: {
-                    text: "Desempenho por Matéria"
-                },
-                axisY: {
-                    title: "Notas"
-                },
-                data: [{
-                    type: "column",
-                    dataPoints: @Html.Raw(Json.Serialize(Model.DesempenhoDataModel.DesempenhoPorDisciplina.Select(d => new { label = d.Disciplina, y = d.Nota })))
-                }]
-            });
-            chartMateria.render();
-        }
+        function renderCharts(data) {
+            if (document.getElementById('graficoDesempenhoMateria')) {
+                var chartMateria = new CanvasJS.Chart("graficoDesempenhoMateria", {
+                    theme: "light2",
+                    title: {
+                        text: "Desempenho por Matéria"
+                    },
+                    data: [{
+                        type: "column",
+                        dataPoints: data.desempenhoPorDisciplina.map(d => ({ label: d.disciplina, y: d.nota }))
+                    }]
+                });
+                chartMateria.render();
+            }
 
-        if (document.getElementById('graficoAlunosNotas')) {
-            var chartAlunosNotas = new CanvasJS.Chart("graficoAlunosNotas", {
-                theme: "light2",
-                title: {
-                    text: "Alunos x Período"
-                },
-                axisY: {
-                    title: "Notas"
-                },
-                data: [{
-                    type: "bar",
-                    dataPoints: @Html.Raw(Json.Serialize(Model.DesempenhoDataModel.AlunosVsPeriodo.Select(d => new { label = d.Periodo, y = d.Nota })))
-                }]
-            });
-            chartAlunosNotas.render();
-        }
+            if (document.getElementById('graficoAlunosNotas')) {
+                var chartAlunosNotas = new CanvasJS.Chart("graficoAlunosNotas", {
+                    theme: "light2",
+                    title: {
+                        text: "Alunos x Período"
+                    },
+                    data: [{
+                        type: "bar",
+                        dataPoints: data.alunosVsPeriodo.map(d => ({ label: d.periodo, y: d.nota }))
+                    }]
+                });
+                chartAlunosNotas.render();
+            }
 
-        if (document.getElementById('graficoAprovacoes')) {
-            var chartAprovacoes = new CanvasJS.Chart("graficoAprovacoes", {
-                theme: "light2",
-                title: {
-                    text: "Aprovações por Período"
-                },
-                axisY: {
-                    title: "Aprovados"
-                },
-                data: [{
-                    type: "line",
-                    dataPoints: @Html.Raw(Json.Serialize(Model.DesempenhoDataModel.Aprovacoes.Select(d => new { label = d.Periodo, y = d.Aprovado })))
-                }]
-            });
-            chartAprovacoes.render();
+            if (document.getElementById('graficoAprovacoes')) {
+                var chartAprovacoes = new CanvasJS.Chart("graficoAprovacoes", {
+                    theme: "light2",
+                    title: {
+                        text: "Aprovações por Período"
+                    },
+                    data: [{
+                        type: "line",
+                        dataPoints: data.aprovacoes.map(d => ({ label: d.periodo, y: d.aprovado }))
+                    }]
+                });
+                chartAprovacoes.render();
+            }
         }
-    }
     </script>
 }

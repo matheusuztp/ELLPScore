@@ -106,10 +106,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGVzZW1wZW5ob1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/ELLPScore/ELLPScore/Pages/Desempenho/_DesempenhoPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGVzZW1wZW5ob1xfRGVzZW1wZW5ob1BhcnRpYWwuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/ELLPScore/ELLPScore/Pages/Disciplinas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGlzY2lwbGluYXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
