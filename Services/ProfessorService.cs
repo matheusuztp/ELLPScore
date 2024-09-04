@@ -12,6 +12,7 @@ public interface IProfessorService
     Task<IdentityResult> AtualizarProfessorAsync(Professor professor);
     bool ExcluirProfessor(Professor professor, out string erro);
     Task<IdentityResult> AlterarSenhaAsync(Professor professor, string novaSenha);
+    Task<int> GetTotalProfessoresAsync();
 }
 
 
@@ -24,6 +25,11 @@ public class ProfessorService : IProfessorService
     {
         _userManager = userManager;
         _context = context;
+    }
+
+    public async Task<int> GetTotalProfessoresAsync()
+    {
+        return await _context.Professores.CountAsync();
     }
 
     public async Task<IList<Professor>> GetAllProfessoresAsync()

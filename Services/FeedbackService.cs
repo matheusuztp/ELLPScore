@@ -12,6 +12,7 @@ public interface IFeedbackService
     bool CadastrarFeedback(Feedback feedback, out string erro);
     bool AtualizarFeedback(Feedback feedback, out string erro);
     bool ExcluirFeedback(int id, out string erro);
+    Task<int> GetTotalFeedbacksAsync();
 }
 
 public class FeedbackService : IFeedbackService
@@ -21,6 +22,11 @@ public class FeedbackService : IFeedbackService
     public FeedbackService(ELLPScoreDBContext context)
     {
         _context = context;
+    }
+
+    public async Task<int> GetTotalFeedbacksAsync()
+    {
+        return await _context.Feedbacks.CountAsync();
     }
 
     // Obter todos os feedbacks

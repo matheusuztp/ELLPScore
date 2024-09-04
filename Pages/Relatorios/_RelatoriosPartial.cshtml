@@ -1,0 +1,36 @@
+﻿@model IList<ELLPScore.Domain.DTO.RelatoriosViewModel>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Turma</th>
+            <th>Série</th>
+            <th>Nome do Aluno</th>
+            <th>Disciplina</th>
+            <th>Período</th>
+            <th>Nota</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Turma</td>
+                    <td>@item.Serie</td>
+                    <td>@item.NomeAluno</td>
+                    <td>@item.Disciplina</td>
+                    <td>@item.Periodo</td>
+                    <td>@item.Nota</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center">Nenhum dado encontrado</td>
+            </tr>
+        }
+    </tbody>
+</table>

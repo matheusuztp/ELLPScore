@@ -10,6 +10,7 @@ public interface ITurmaService
     bool AtualizarTurma(Turma turma, out string erro);
     bool ExcluirTurma(int id, out string erro);
     Task<IList<Professor>> GetAllProfessoresAsync();
+    Task<int> GetTotalTurmasAsync();
 }
 
 public class TurmaService : ITurmaService
@@ -19,6 +20,11 @@ public class TurmaService : ITurmaService
     public TurmaService(ELLPScoreDBContext context)
     {
         _context = context;
+    }
+
+    public async Task<int> GetTotalTurmasAsync()
+    {
+        return await _context.Turmas.CountAsync();
     }
 
     public IList<Turma> GetAllTurmas()

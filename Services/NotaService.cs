@@ -2,7 +2,7 @@
 using ELLPScore.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace ELLPScore.Services
+namespace ELLPScore
 {
     public interface INotaService
     {
@@ -13,6 +13,7 @@ namespace ELLPScore.Services
         bool ExcluirNota(int id, out string erro);
         IEnumerable<Nota> GetNotasByAlunoId(int alunoId);
         IEnumerable<Nota> GetNotasByTurma(int turmaId);
+        Task<int> GetTotalNotasAsync();
     }
 
     public class NotaService : INotaService
@@ -22,6 +23,10 @@ namespace ELLPScore.Services
         public NotaService(ELLPScoreDBContext context)
         {
             _context = context;
+        }
+        public async Task<int> GetTotalNotasAsync()
+        {
+            return await _context.Notas.CountAsync();
         }
 
         public IEnumerable<Nota> GetNotasByAlunoId(int alunoId)

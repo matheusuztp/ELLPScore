@@ -8,6 +8,7 @@ public interface IDisciplinaService
     bool CadastrarDisciplina(Disciplina disciplina, out string erro);
     bool AtualizarDisciplina(Disciplina disciplina, out string erro);
     bool ExcluirDisciplina(int id, out string erro);
+    Task<int> GetTotalDisciplinasAsync();
 }
 
 public class DisciplinaService : IDisciplinaService
@@ -17,6 +18,11 @@ public class DisciplinaService : IDisciplinaService
     public DisciplinaService(ELLPScoreDBContext context)
     {
         _context = context;
+    }
+
+    public async Task<int> GetTotalDisciplinasAsync()
+    {
+        return await _context.Disciplinas.CountAsync(); 
     }
 
     public IList<Disciplina> GetAllDisciplinas()

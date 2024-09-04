@@ -30,13 +30,14 @@ namespace ELLPScore.Pages.Desempenho
             Alunos = new SelectList(alunos, "AlunoID", "Nome");
         }
 
-        public void OnGetDesempenhoPorAluno(int alunoId)
+        public PartialViewResult OnGetDesempenhoPorAluno(int alunoId)
         {
             var alunos = _alunoService.GetAllAlunos()
                 .Select(a => new { a.AlunoID, a.Nome })
                 .ToList();
             DesempenhoDataModel = _desempenhoService.GetDesempenhoPorAluno(alunoId);
             Alunos = new SelectList(alunos, "AlunoID", "Nome");
+            return Partial("_DesempenhoPartial", DesempenhoDataModel);
         }
     }
 

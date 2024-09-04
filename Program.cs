@@ -53,6 +53,7 @@ builder.Services.AddTransient<IProfessorService, ProfessorService>();
 builder.Services.AddTransient<INotaService, NotaService>();
 builder.Services.AddTransient<IFeedbackService, FeedbackService>();
 builder.Services.AddTransient<IDesempenhoService, DesempenhoService>();
+builder.Services.AddTransient<IRelatorioService, RelatorioService>();
 
 
 var app = builder.Build();
@@ -85,10 +86,10 @@ app.Use(async (context, next) =>
         "/Identity/Account/Login",
         "/Identity/Account/Register",
         "/Identity/Account/ForgotPassword",
-        "/Identity/Account/ResetPassword", 
+        "/Identity/Account/ResetPassword",
         "/Identity/Account/ResetPasswordConfirmation",
         "/Identity/Account/ForgotPasswordConfirmation",
-        "/Identity/Account/ConfirmEmail", 
+        "/Identity/Account/ConfirmEmail",
         "/Identity/Account/ConfirmEmailChange",
     };
 

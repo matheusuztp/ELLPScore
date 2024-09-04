@@ -11,6 +11,7 @@ public interface IAlunoService
     bool AtualizarAluno(Aluno aluno, out string erro);
     bool ExcluirAluno(int id, out string erro);
     IList<Turma> GetAllTurmas();
+    Task<int> GetTotalAlunosAsync();
 }
 
 public class AlunoService : IAlunoService
@@ -26,6 +27,11 @@ public class AlunoService : IAlunoService
     public IList<Aluno> GetAllAlunos()
     {
         return _context.Alunos.ToList();
+    }
+
+    public async Task<int> GetTotalAlunosAsync()
+    {
+        return await _context.Alunos.CountAsync();
     }
 
     // Obter aluno por ID

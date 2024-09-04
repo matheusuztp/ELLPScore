@@ -20,7 +20,7 @@
     </div>
 
     <div id="grid">
-        <partial name="_DesempenhoPartial" model="@Model.DesempenhoDataModel" />
+        <partial name="_DesempenhoPartial"/>
     </div>
 </div>
 
@@ -29,20 +29,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function renderCharts() {
-            debugger;
-
-            // Verificar se os gráficos já existem antes de tentar destruí-los
-            if (window.graficoDesempenhoMateria && typeof window.graficoDesempenhoMateria.destroy === 'function') {
-                window.graficoDesempenhoMateria.destroy();
-            }
-            if (window.graficoAlunosNotas && typeof window.graficoAlunosNotas.destroy === 'function') {
-                window.graficoAlunosNotas.destroy();
-            }
-            if (window.graficoAprovacoes && typeof window.graficoAprovacoes.destroy === 'function') {
-                window.graficoAprovacoes.destroy();
-            }
-
-            // Recriar os gráficos se os elementos existirem no DOM
             if (document.getElementById('graficoDesempenhoMateria')) {
                 var ctxMateria = document.getElementById('graficoDesempenhoMateria').getContext('2d');
                 var desempenhoMateriaData = {
@@ -103,7 +89,7 @@
 
         $(document).ready(function () {
             renderCharts();
-            
+
             $('#alunoSelect').on('change', function () {
                 var alunoId = $(this).val();
 
@@ -111,7 +97,7 @@
                     url: '@Url.Page("Index", new { handler = "DesempenhoPorAluno" })',
                     type: 'GET',
                     data: { alunoId: alunoId },
-                    success: function () {
+                    success: function (response) {
                         renderCharts();
                     },
                     error: function () {

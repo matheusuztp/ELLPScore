@@ -87,9 +87,6 @@ namespace ELLPScore.Pages.Notas
             if(input.DisciplinaID == 0)
                 erro += "Disciplina deve estar selecionada." + Environment.NewLine;
 
-            if(input.TurmaID == 0)
-                erro += "Turma deve estar selecionada." + Environment.NewLine;
-
             decimal valorNota = 0;
             if (input.ValorNota != null)
             {
