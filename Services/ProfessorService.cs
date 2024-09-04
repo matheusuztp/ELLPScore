@@ -10,7 +10,7 @@ public interface IProfessorService
     Task<IdentityResult> CadastrarProfessorAsync(Professor professor, string senha);
     Task<Professor> GetProfessorByIdAsync(int id);
     Task<IdentityResult> AtualizarProfessorAsync(Professor professor);
-    Task<IdentityResult> ExcluirProfessorAsync(Professor professor);
+    bool ExcluirProfessor(Professor professor, out string erro);
     Task<IdentityResult> AlterarSenhaAsync(Professor professor, string novaSenha);
 }
 
@@ -18,10 +18,12 @@ public interface IProfessorService
 public class ProfessorService : IProfessorService
 {
     private readonly UserManager<Professor> _userManager;
+    private readonly ELLPScoreDBContext _context;
 
-    public ProfessorService(UserManager<Professor> userManager)
+    public ProfessorService(UserManager<Professor> userManager, ELLPScoreDBContext context)
     {
         _userManager = userManager;
+        _context = context;
     }
 
     public async Task<IList<Professor>> GetAllProfessoresAsync()
@@ -55,16 +57,26 @@ public class ProfessorService : IProfessorService
         return await _userManager.UpdateAsync(existingProfessor);
     }
 
-    public async Task<IdentityResult> ExcluirProfessorAsync(Professor professor)
+    public bool ExcluirProfessor(Professor professor, out string erro)
     {
-        var existingProfessor = await _userManager.FindByIdAsync(professor.Id.ToString());
+        erro = string.Empty;
+        var existingProfessor = _userManager.FindByIdAsync(professor.Id.ToString()).GetAwaiter().GetResult();
 
         if (existingProfessor == null)
         {
-            return IdentityResult.Failed(new IdentityError { Description = "Professor não encontrado." });
+            erro = "Professor nao encontrado.";
+            return false;
         }
 
-        return await _userManager.DeleteAsync(existingProfessor);
+        var professorTemTurma = _context.Turmas.Any(t => t.ProfessorID == professor.Id);
+        if(professorTemTurma)
+        {
+            erro = "Nao e possivel excluir um professor com turmas cadastradas.";
+            return false;
+        }
+
+        _userManager.DeleteAsync(existingProfessor).GetAwaiter().GetResult();
+        return true; 
     }
 
     public async Task<IdentityResult> AlterarSenhaAsync(Professor professor, string novaSenha)

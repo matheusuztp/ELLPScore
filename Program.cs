@@ -86,7 +86,7 @@ app.Use(async (context, next) =>
         "/Identity/Account/ResetPasswordConfirmation",
         "/Identity/Account/ForgotPasswordConfirmation",
         "/Identity/Account/ConfirmEmail", 
-        "/Identity/Account/ConfirmEmailChange" 
+        "/Identity/Account/ConfirmEmailChange",
     };
 
     if (!context.User.Identity.IsAuthenticated &&

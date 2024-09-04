@@ -9,12 +9,22 @@
 <div class="centered-form-container">
     <div class="centered-form-card">
         <h3 class="text-center">@ViewData["Title"]</h3>
-        <form method="post">
+        <form method="post" id="registerForm">
             <input type="hidden" asp-for="ProfessorId" />
             <div class="form-group">
                 <label asp-for="NovaSenha"></label>
-                <input asp-for="NovaSenha" class="form-control" type="password" />
+                <input asp-for="NovaSenha" class="form-control" type="password" id="password" />
                 <span asp-validation-for="NovaSenha" class="text-danger"></span>
+                <small class="form-text text-muted">
+                    A senha deve conter pelo menos:
+                    <ul>
+                        <li id="length" class="text-danger">- 6 caracteres</li>
+                        <li id="number" class="text-danger">- Um número (0-9)</li>
+                        <li id="lowercase" class="text-danger">- Um caractere minúsculo (a-z)</li>
+                        <li id="uppercase" class="text-danger">- Um caractere maiúsculo (A-Z)</li>
+                        <li id="special" class="text-danger">- Um caractere especial (como @@, #, $)</li>
+                    </ul>
+                </small>
             </div>
 
             <div class="d-flex justify-content-between">
@@ -24,3 +34,70 @@
         </form>
     </div>
 </div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(document).ready(function () {
+            function validatePassword(password) {
+                let isValid = true;
+
+                // Valida se tem pelo menos 6 caracteres
+                if (password.length >= 6) {
+                    $('#length').removeClass('text-danger').addClass('text-success');
+                } else {
+                    $('#length').removeClass('text-success').addClass('text-danger');
+                    isValid = false;
+                }
+
+                // Valida se tem pelo menos um número
+                if (/[0-9]/.test(password)) {
+                    $('#number').removeClass('text-danger').addClass('text-success');
+                } else {
+                    $('#number').removeClass('text-success').addClass('text-danger');
+                    isValid = false;
+                }
+
+                // Valida se tem pelo menos uma letra maiúscula
+                if (/[A-Z]/.test(password)) {
+                    $('#uppercase').removeClass('text-danger').addClass('text-success');
+                } else {
+                    $('#uppercase').removeClass('text-success').addClass('text-danger');
+                    isValid = false;
+                }
+
+                // Valida se tem pelo menos uma letra minúscula
+                if (/[a-z]/.test(password)) {
+                    $('#lowercase').removeClass('text-danger').addClass('text-success');
+                } else {
+                    $('#lowercase').removeClass('text-success').addClass('text-danger');
+                    isValid = false;
+                }
+
+                // Valida se tem pelo menos um caractere especial
+                if (/[@@#$%^&*(),.?":{}|<>]/.test(password)) {
+                    $('#special').removeClass('text-danger').addClass('text-success');
+                } else {
+                    $('#special').removeClass('text-success').addClass('text-danger');
+                    isValid = false;
+                }
+
+                return isValid;
+            }
+
+            $('#password').on('keyup', function () {
+                validatePassword($(this).val());
+            });
+
+            $('#registerForm').on('submit', function (e) {
+                var password = $('#password').val();
+                if (!validatePassword(password)) {
+                    e.preventDefault(); // Impede o envio do formulário
+                    alert('Por favor, verifique os requisitos de senha antes de continuar.');
+                }
+            });
+        });
+    </script>
+}

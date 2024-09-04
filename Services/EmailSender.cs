@@ -17,11 +17,14 @@ namespace ELLPScore.Services
 
         public Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            var smtpClient = new SmtpClient(_emailSettings.SmtpServer)
+            var smtpClient = new SmtpClient()
             {
-                Port = _emailSettings.SmtpPort,
+                UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(_emailSettings.Username, _emailSettings.Password),
-                EnableSsl = true, // O Hotmail requer SSL
+                Port = 587,
+                Host = "smtp.office365.com",
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                EnableSsl = true
             };
 
             var mailMessage = new MailMessage

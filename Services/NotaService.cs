@@ -55,6 +55,17 @@ namespace ELLPScore.Services
             erro = string.Empty;
             try
             {
+                var jaExiste = _context.Notas.Any(n => n.AlunoID == nota.AlunoID
+                                                    && n.DisciplinaID == nota.DisciplinaID
+                                                    && n.Periodo == nota.Periodo
+                                                    && n.NotaValor == nota.NotaValor);
+
+                if(jaExiste)
+                {
+                    erro = "Nota já cadastrada.";
+                    return false;
+                }
+
                 _context.Notas.Add(nota);
                 _context.SaveChanges();
                 return true;

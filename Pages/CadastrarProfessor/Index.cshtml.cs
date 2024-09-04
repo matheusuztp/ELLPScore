@@ -3,28 +3,35 @@ using ELLPScore.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Identity;
 
 namespace ELLPScore.Pages.CadastrarProfessor
 {
     public class IndexModel : PageModel
     {
         private readonly IProfessorService _professorService;
+        private readonly UserManager<Professor> _userManager;
 
         [BindProperty]
         public ProfessorInputModel ProfessorInput { get; set; }
 
-        public IndexModel(IProfessorService professorService)
+        public Professor Professor { get; set; }
+
+        public IndexModel(IProfessorService professorService, UserManager<Professor> userManager)
         {
             _professorService = professorService;
+            _userManager = userManager;
         }
 
         public void OnGet()
         {
             ProfessorInput = new ProfessorInputModel();
+            Professor = _userManager.GetUserAsync(User).GetAwaiter().GetResult();
         }
 
         public IActionResult OnGetEdit(int id)
         {
+            Professor = _userManager.GetUserAsync(User).GetAwaiter().GetResult();
             var professor = _professorService.GetProfessorByIdAsync(id).Result;
 
             if (professor == null)
@@ -45,6 +52,7 @@ namespace ELLPScore.Pages.CadastrarProfessor
 
         public async Task<IActionResult> OnPostEdit(int id)
         {
+            Professor = _userManager.GetUserAsync(User).GetAwaiter().GetResult();
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -87,6 +95,7 @@ namespace ELLPScore.Pages.CadastrarProfessor
 
         public async Task<IActionResult> OnPostAsync()
         {
+            Professor = _userManager.GetUserAsync(User).GetAwaiter().GetResult();
             if (!ModelState.IsValid)
             {
                 return Page();

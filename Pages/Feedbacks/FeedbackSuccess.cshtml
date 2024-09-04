@@ -1,0 +1,23 @@
+﻿@page
+@model FeedbackSuccessModel
+@{
+    ViewData["Title"] = "Feedback Enviado";
+    Layout = "~/Pages/Shared/_LayoutLogado.cshtml";
+}
+
+<div class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <h4 class="alert-heading text-success">Feedback enviado com sucesso!</h4>
+                        <p class="mb-4">Obrigado por enviar o feedback. O aluno será notificado em breve.</p>
+                        <hr>
+                        <a href="/Feedbacks" class="btn btn-primary btn-lg">Voltar para Feedbacks</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

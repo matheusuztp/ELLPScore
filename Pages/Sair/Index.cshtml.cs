@@ -4,12 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
 
-namespace ELLPScore.Areas.Identity.Pages.Account
+namespace ELLPScore.Pages.Sair
 {
-    public class LogoutModel : PageModel
+    public class IndexModel : PageModel
     {
         private readonly SignInManager<Professor> _signInManager;
-        public LogoutModel(SignInManager<Professor> signInManager)
+        public IndexModel(SignInManager<Professor> signInManager)
         {
             _signInManager = signInManager;
         }
@@ -17,13 +17,7 @@ namespace ELLPScore.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnGet()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToPage("Login");
-        }
-
-        public async Task<IActionResult> OnPost()
-        {
-            await _signInManager.SignOutAsync();
-            return RedirectToPage("Login");
+            return RedirectToPage("/Index");
         }
     }
 }

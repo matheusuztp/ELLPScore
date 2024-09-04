@@ -80,7 +80,14 @@ public class DisciplinaService : IDisciplinaService
             var disciplina = _context.Disciplinas.Find(id);
             if (disciplina == null)
             {
-                erro = "Disciplina não encontrada.";
+                erro = "Disciplina nao encontrada.";
+                return false;
+            }
+
+            var disciplinaEmUso = _context.Notas.Any(t => t.DisciplinaID == disciplina.DisciplinaID);
+            if (disciplinaEmUso)
+            {
+                erro = "Nao e possivel excluir uma disciplina vinculada a uma nota.";
                 return false;
             }
 

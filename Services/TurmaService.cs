@@ -94,7 +94,13 @@ public class TurmaService : ITurmaService
             var turma = _context.Turmas.Find(id);
             if (turma == null)
             {
-                erro = "Turma não encontrada.";
+                erro = "Turma nao encontrada.";
+                return false;
+            }
+
+            if(_context.Alunos.Any(a => a.TurmaID == id))
+            {
+                erro = "Nao e possivel excluir uma turma com alunos matriculados.";
                 return false;
             }
 

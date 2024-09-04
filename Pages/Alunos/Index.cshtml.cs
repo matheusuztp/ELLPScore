@@ -37,7 +37,8 @@ namespace ELLPScore.Pages.Alunos
 
             if (!success)
             {
-                ModelState.AddModelError(string.Empty, erro);
+                Alunos = _alunoService.GetAllAlunos();
+                ViewData["ErrorMessage"] = erro;
                 return Page();
             }
 

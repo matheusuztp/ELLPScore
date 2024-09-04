@@ -44,7 +44,21 @@
 </div>
 
 @section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
+        // Verifica se há uma mensagem de erro no ViewData
+        @if (ViewData["ErrorMessage"] != null)
+        {
+            <text>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro',
+                    text: '@ViewData["ErrorMessage"]',
+                    confirmButtonText: 'Ok'
+                });
+            </text>
+        }
         function confirmDelete(alunoId) {
             Swal.fire({
                 title: 'Tem certeza?',

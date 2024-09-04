@@ -2,11 +2,8 @@ using ELLPScore.Domain;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Collections.Generic;
 using ELLPScore.Services;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using System.ComponentModel.DataAnnotations;
-using System.Globalization;
 using System.Reflection;
 
 namespace ELLPScore.Pages.Notas
@@ -94,8 +91,14 @@ namespace ELLPScore.Pages.Notas
                 erro += "Turma deve estar selecionada." + Environment.NewLine;
 
             decimal valorNota = 0;
-            if (input.ValorNota != null && input.ValorNota.Contains('.'))
-                valorNota = decimal.Parse(input.ValorNota.Replace('.', ','));
+            if (input.ValorNota != null)
+            {
+                if(input.ValorNota.Contains('.'))
+                    valorNota = decimal.Parse(input.ValorNota.Replace('.', ','));
+                else
+                    valorNota = decimal.Parse(input.ValorNota);
+            }
+
 
             if(valorNota > 100 || valorNota < 0)
             {
@@ -104,16 +107,20 @@ namespace ELLPScore.Pages.Notas
 
             if (!string.IsNullOrEmpty(erro))
             {
-                ModelState.AddModelError(string.Empty, erro);
                 RefreshData(input.AlunoID);
-                return Page();
+                return new JsonResult(new { success = false, errors = erro })
+                {
+                    StatusCode = 500
+                };
             }
+
+            var aluno = _alunoService.GetAlunoById(input.AlunoID);
 
             var nota = new Nota
             {
                 AlunoID = input.AlunoID,
                 DisciplinaID = input.DisciplinaID,
-                TurmaID = input.TurmaID,
+                TurmaID = aluno.TurmaID,
                 Periodo = input.Periodo,
                 NotaValor = valorNota,
                 Serie = input.Serie
@@ -122,14 +129,17 @@ namespace ELLPScore.Pages.Notas
             if (!_notaService.CadastrarNota(nota, out string erroCad))
             {
                 erro += Environment.NewLine + erroCad;
-                ModelState.AddModelError(string.Empty, erro);
+                return new JsonResult(new { success = false, errors = erro })
+                {
+                    StatusCode = 500
+                };
             }
 
             RefreshData(input.AlunoID);
             return Page();
         }
 
-        public IActionResult OnGetGetSeriePorAluno(int alunoId)
+        public IActionResult OnGetSeriePorAluno(int alunoId)
         {
             var aluno = _alunoService.GetAllAlunos().FirstOrDefault(a => a.AlunoID == alunoId);
             if (aluno != null)

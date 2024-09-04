@@ -3,6 +3,7 @@ using ELLPScore.Domain.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ELLPScore.Pages.Professores
 {
@@ -31,11 +32,12 @@ namespace ELLPScore.Pages.Professores
                 return Page();
             }
 
-            var success = _professorService.ExcluirProfessorAsync(professor);
+            var success = _professorService.ExcluirProfessor(professor, out string erro);
 
-            if (!success.IsCompleted)
+            if (!success)
             {
-                ModelState.AddModelError(string.Empty, "Erro ao excluir professor");
+                Professores = _professorService.GetAllProfessoresAsync().GetAwaiter().GetResult();
+                ViewData["ErrorMessage"] = erro;
                 return Page();
             }
 

@@ -1,5 +1,5 @@
 ﻿@page
-@model FeedbackModel
+@model Feedbacks.IndexModel
 @{
     ViewData["Title"] = "Feedbacks";
     Layout = "~/Pages/Shared/_LayoutLogado.cshtml";
@@ -9,14 +9,6 @@
 </head>
 <div class="container">
     <h2 class="text-center">@ViewData["Title"]</h2>
-
-    @if (TempData["SuccessMessage"] != null)
-    {
-        <div class="alert alert-success">
-            @TempData["SuccessMessage"]
-        </div>
-    }
-
     <form id="feedbackForm" method="post" class="feedback-form">
         <div class="row mb-3">
             <div class="col-md-6">
@@ -50,10 +42,14 @@
 @section Scripts {
     <!-- CKEditor Script -->
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
-
     <script>
         ClassicEditor
             .create(document.querySelector('#Feedback'))
+            .then(editor => {
+                editor.editing.view.change(writer => {
+                    writer.setStyle('height', '50vh', editor.editing.view.document.getRoot());
+                });
+            })
             .catch(error => {
                 console.error(error);
             });
@@ -63,20 +59,20 @@
                 var alunoId = $('#alunoSelect').val();
                 if (alunoId) {
                     $.ajax({
-                        url: '@Url.Page("Index", new { handler = "GetMatriculaPorAluno" })',
+                        url: '@Url.Page("Index", new { handler = "MatriculaPorAluno" })',
                         type: 'GET',
                         data: { alunoId: alunoId },
                         success: function (data) {
-                            $('#matriculaInput').val(data[0]);
+                            $('#matriculaInput').val(data);
                         },
                         error: function () {
-                            alert('Erro ao buscar a matrícula do aluno.');
+                            alert('Erro ao buscar a matricula do aluno.');
                         }
                     });
                 } else {
                     $('#matriculaInput').val('');
                 }
             });
-        }
+        });
     </script>
 }

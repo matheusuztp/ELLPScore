@@ -11,13 +11,12 @@
 
 <div class="container">
     <h2 class="text-center">@ViewData["Title"]</h2>
-
     <form id="notaForm" method="post" style="padding: 0 30vh;">
         <div class="row">
 
             <div class="col-md-4">
                 <label>Turma:</label>
-                <input type="text" name="Turma" id="turmaInput" class="form-control" value="@Model.Turma" readonly />
+                <input type="text" name="TurmaID" id="turmaInput" class="form-control" value="@Model.Turma" readonly />
             </div>
             <div class="col-md-3">
                 <label>Serie:</label>
@@ -46,7 +45,7 @@
             </div>
             <div class="col-md-3">
                 <label>Período:</label>
-                <select name="Período" class="form-control">
+                <select name="Periodo" class="form-control">
                     @foreach (var per in Model.Periodos)
                     {
                         <option value="@per.Value" isSelected>@per.Text</option>
@@ -55,22 +54,19 @@
             </div>
             <div class="col-md-2">
                 <label for="ValorNota">Nota:</label>
-                <input type="number" name="ValorNota" class="form-control" step="0.01" min="0" max="100" />
+                <input type="number" name="ValorNota" class="form-control" step="0.01" min="0" max="100" value="0"/>
             </div>
 
             <div class="col-md-2" style="margin-top: auto; margin-inline: auto;">
                 <button type="submit" class="btn btn-primary">Salvar</button>
             </div>
-
-        </div>
-        <div class="row">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         </div>
     </form>
     <div id="grid">
         <partial name="_NotaPartial" model="@Model.Notas" />
     </div>
 
+    
 </div>
 
 </div>
@@ -100,14 +96,19 @@
                 }
             });
         }
+
+        
     </script>
     <script>
         $(document).ready(function () {
+
+        
+
             $('#alunoSelect').on('change', function () {
                 var alunoId = $('#alunoSelect').val();
                 if (alunoId) {
                     $.ajax({
-                        url: '@Url.Page("Index", new { handler = "GetSeriePorAluno" })',
+                        url: '@Url.Page("Index", new { handler = "SeriePorAluno" })',
                         type: 'GET',
                         data: { alunoId: alunoId },
                         success: function (data) {
@@ -128,8 +129,8 @@
 
 
             $('#notaForm').on('submit', function (e) {
+                
                 e.preventDefault();
-
                 var form = $(this);
                 var alunoId = $('#alunoSelect').val();
 
@@ -140,8 +141,22 @@
                     success: function () {
                         $('#grid').load('/Notas?handler=NotaPartial&alunoId=' + alunoId);
                     },
-                    error: function () {
-                        alert('Erro ao salvar a nota.');
+                    error: function (data) {
+                        debugger;
+                        var errorMessage = '';
+
+                        if (data.responseJSON.errors) {
+                            errorMessage = data.responseJSON.errors;
+                        } else {
+                            errorMessage = "Ocorreu um erro desconhecido. Por favor, tente novamente.";
+                        }
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Erro',
+                            html: errorMessage,
+                            confirmButtonText: 'Ok'
+                        });
                     }
                 });
             });

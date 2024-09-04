@@ -38,7 +38,8 @@ namespace ELLPScore.Pages.Turmas
 
             if (!success)
             {
-                ModelState.AddModelError(string.Empty, erro);
+                Turmas = _turmaService.GetAllTurmas();
+                ViewData["ErrorMessage"] = erro;
                 return Page();
             }
 

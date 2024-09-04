@@ -67,16 +67,7 @@ public class AlunoService : IAlunoService
         erro = string.Empty;
         try
         {
-            var alunoJaExiste = _context.Alunos.Any(a => a.CPF == aluno.CPF
-                                                      || a.Email == aluno.Email
-                                                      || a.Matricula == aluno.Matricula);
-            if (alunoJaExiste)
-            {
-                erro = "Aluno já cadastrado.";
-                return false;
-            }
-
-            _context.Entry(alunoJaExiste).CurrentValues.SetValues(aluno);
+            _context.Update(aluno);
             _context.SaveChanges();
             return true;
         }
@@ -96,7 +87,14 @@ public class AlunoService : IAlunoService
             var aluno = _context.Alunos.Find(id);
             if (aluno == null)
             {
-                erro = "Aluno não encontrado.";
+                erro = "Aluno nao encontrado.";
+                return false;
+            }
+
+            var alunoTemNota = _context.Notas.Any(n => n.AlunoID == id);
+            if (alunoTemNota)
+            {
+                erro = "Aluno possui notas cadastradas.";
                 return false;
             }
 

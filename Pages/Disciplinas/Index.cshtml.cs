@@ -37,7 +37,8 @@ namespace ELLPScore.Pages.Disciplinas
 
             if (!success)
             {
-                ModelState.AddModelError(string.Empty, erro);
+                Disciplinas = _disciplinaService.GetAllDisciplinas();
+                ViewData["ErrorMessage"] = erro;
                 return Page();
             }
 
