@@ -38,13 +38,22 @@ namespace ELLPScore
                     Nota = (int)g.Average(n => n.NotaValor)
                 }).ToList();
 
-            var alunosVsNotas = _notaRepository.GetNotasByTurma(aluno.TurmaID)
-                .GroupBy(n => n.Aluno.Nome)
-                .Select(g => new AlunosVsNotas
+            var alunosVsPeriodo = _notaRepository.GetNotasByPeriodo(aluno.TurmaID)
+                .GroupBy(n => n.Periodo)
+                .Select(g => new AlunosVsPeriodo
                 {
-                    Aluno = g.Key,
+                    Periodo = g.Key,
                     Nota = (int)g.Average(n => n.NotaValor)
                 }).ToList();
+
+            foreach(var periodo in alunosVsPeriodo)
+            {
+                if (Enum.TryParse(typeof(Periodos), periodo.Periodo, out var periodoEnum))
+                {
+                    var periodoDisplayName = ((Periodos)periodoEnum).GetDisplayName();
+                    periodo.Periodo = periodoDisplayName;
+                }
+            }
 
             var aprovacoes = _notaRepository.GetNotasByAlunoId(alunoId)
                 .GroupBy(n => n.Periodo)
@@ -57,7 +66,7 @@ namespace ELLPScore
             return new DesempenhoDataModel
             {
                 DesempenhoPorDisciplina = desempenhoPorMateria,
-                AlunosVsNotas = alunosVsNotas,
+                AlunosVsPeriodo = alunosVsPeriodo,
                 Aprovacoes = aprovacoes
             };
         }

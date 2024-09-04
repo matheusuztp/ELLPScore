@@ -17,7 +17,9 @@ namespace ELLPScore.Pages.Desempenho
             _desempenhoService = desempenhoService;
         }
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
+        public int AlunoSelecionado { get; set; }
+
         public DesempenhoDataModel DesempenhoDataModel { get; set; }
         public SelectList Alunos { get; set; }
 
@@ -30,13 +32,9 @@ namespace ELLPScore.Pages.Desempenho
             Alunos = new SelectList(alunos, "AlunoID", "Nome");
         }
 
-        public PartialViewResult OnGetDesempenhoPorAluno(int alunoId)
+        public PartialViewResult OnGetDesempenhoPorAluno()
         {
-            var alunos = _alunoService.GetAllAlunos()
-                .Select(a => new { a.AlunoID, a.Nome })
-                .ToList();
-            DesempenhoDataModel = _desempenhoService.GetDesempenhoPorAluno(alunoId);
-            Alunos = new SelectList(alunos, "AlunoID", "Nome");
+            DesempenhoDataModel = _desempenhoService.GetDesempenhoPorAluno(AlunoSelecionado);
             return Partial("_DesempenhoPartial", DesempenhoDataModel);
         }
     }

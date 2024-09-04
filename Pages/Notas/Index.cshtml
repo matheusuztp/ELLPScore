@@ -25,6 +25,11 @@
             <div class="col-md-4">
                 <label>Aluno:</label>
                 <select name="AlunoID" id="alunoSelect" class="form-control">
+                    @if (Model.Alunos.Count() == 0)
+                    {
+                        <option value="0">Não há alunos</option>
+                    }
+
                     @foreach (var aluno in Model.Alunos)
                     {
                         var isSelected = aluno.Value == Model.AlunoSelecionadoId.ToString() ? "selected" : "";
@@ -37,6 +42,11 @@
             <div class="col-md-4">
                 <label>Disciplina:</label>
                 <select name="DisciplinaID" class="form-control">
+                    @if (Model.Disciplinas.Count() == 0)
+                    {
+                        <option value="0">Não há disciplinas</option>
+                    }
+
                     @foreach (var disciplina in Model.Disciplinas)
                     {
                         <option value="@disciplina.Value">@disciplina.Text</option>

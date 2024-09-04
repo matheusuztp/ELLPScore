@@ -30,7 +30,7 @@ namespace ELLPScore.Pages.Relatorios
         public List<SelectListItem> Disciplinas { get; set; }
         public List<SelectListItem> Professores { get; set; }
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public Filtros Filtros { get; set; }
 
         
@@ -56,10 +56,9 @@ namespace ELLPScore.Pages.Relatorios
                 .ToList();
         }
 
-
-        public async Task<PartialViewResult> OnGetFiltrarRelatoriosAsync(string tipoRelatorio, string search)
+        public async Task<PartialViewResult> OnGetFiltrarRelatoriosAsync()
         {
-            Relatorios = await _relatorioService.FiltrarRelatoriosAsync(tipoRelatorio, search);
+            Relatorios = await _relatorioService.FiltrarRelatoriosAsync(Filtros);
             return Partial("_RelatoriosPartial", Relatorios);
         }
     }

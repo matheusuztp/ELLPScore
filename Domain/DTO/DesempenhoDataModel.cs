@@ -3,7 +3,7 @@
     public class DesempenhoDataModel
     {
         public List<DesempenhoPorDisciplina> DesempenhoPorDisciplina { get; set; }
-        public List<AlunosVsNotas> AlunosVsNotas { get; set; }
+        public List<AlunosVsPeriodo> AlunosVsPeriodo { get; set; }
         public List<Aprovacoes> Aprovacoes { get; set; }
     }
 
@@ -13,9 +13,9 @@
         public int Nota { get; set; }
     }
 
-    public class AlunosVsNotas
+    public class AlunosVsPeriodo
     {
-        public string Aluno { get; set; }
+        public string Periodo { get; set; }
         public int Nota { get; set; }
     }
 

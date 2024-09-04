@@ -6,7 +6,7 @@ namespace ELLPScore
 {
     public interface IRelatorioService
     {
-        Task<List<RelatoriosViewModel>> FiltrarRelatoriosAsync(string tipoRelatorio, string search);
+        Task<List<RelatoriosViewModel>> FiltrarRelatoriosAsync(Filtros filtros);
     }
 
 
@@ -19,29 +19,28 @@ namespace ELLPScore
             _context = context;
         }
 
-        public async Task<List<RelatoriosViewModel>> FiltrarRelatoriosAsync(string tipoRelatorio, string search)
+        public async Task<List<RelatoriosViewModel>> FiltrarRelatoriosAsync(Filtros filtros)
         {
-            var query = _context.Alunos.AsQueryable();
-            var notas = _context.Notas.AsQueryable();
+            var result = from notas in _context.Notas
+                         join alunos in _context.Alunos on notas.AlunoID equals alunos.AlunoID
+                         join turmas in _context.Turmas on notas.TurmaID equals turmas.TurmaID
+                         join disciplinas in _context.Disciplinas on notas.DisciplinaID equals disciplinas.DisciplinaID
+                         join professores in _context.Professores on turmas.ProfessorID equals professores.Id
+                         where (filtros.AlunoId == 0 || notas.AlunoID == filtros.AlunoId)
+                         && (filtros.TurmaId == 0 || notas.TurmaID == filtros.TurmaId)
+                         && (filtros.DisciplinaId == 0 || notas.DisciplinaID == filtros.DisciplinaId)
+                         && (filtros.ProfessorId == 0 || turmas.ProfessorID == filtros.ProfessorId)
+                         select new RelatoriosViewModel
+                         {
+                             NomeAluno = alunos.Nome,
+                             Serie = alunos.Serie,
+                             Turma = turmas.CodigoOuNome,
+                             Disciplina = disciplinas.Nome,
+                             Periodo = notas.Periodo,
+                             Nota = notas.NotaValor
+                         };
 
-            // Adiciona filtros conforme o tipo de relatório selecionado
-            if (!string.IsNullOrEmpty(search))
-            {
-                query = query.Where(a => a.Nome.Contains(search));
-                
-            }
-
-            var result = await query.Select(a => new RelatoriosViewModel
-            {
-                Turma = a.Turma.CodigoOuNome,
-                Serie = a.Serie,
-                NomeAluno = a.Nome,
-                Disciplina = a.Nome,
-                Periodo = a.Nome,
-                Nota = 0
-            }).ToListAsync();
-
-            return result;
+            return result.ToList();
         }
     }
 }

@@ -8,13 +8,13 @@
 <div class="container mt-4">
     <h2>Gerar Relatórios</h2>
 
-    <form method="get">
+   <form method="get" id="gerarRelatorio" action="@Url.Page("Index", new { handler = "FiltrarRelatorios" })">
         <div class="row">
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="alunoSelect">Selecione o Aluno:</label>
                     <select id="alunoSelect" asp-for="Filtros.AlunoId" class="form-control">
-                        <option value="">Todos os Alunos</option>
+                        <option value="0">Todos os Alunos</option>
                         @foreach (var aluno in Model.Alunos)
                         {
                                 <option value="@aluno.Value">@aluno.Text</option>
@@ -26,7 +26,7 @@
                 <div class="form-group">
                     <label for="turmaSelect">Selecione a Turma:</label>
                     <select id="turmaSelect" asp-for="Filtros.TurmaId" class="form-control">
-                        <option value="">Todas as Turmas</option>
+                        <option value="0">Todas as Turmas</option>
                         @foreach (var turma in Model.Turmas)
                         {
                                 <option value="@turma.Value">@turma.Text</option>
@@ -38,7 +38,7 @@
                 <div class="form-group">
                     <label for="disciplinaSelect">Selecione a Disciplina:</label>
                     <select id="disciplinaSelect" asp-for="Filtros.DisciplinaId" class="form-control">
-                        <option value="">Todas as Disciplinas</option>
+                        <option value="0">Todas as Disciplinas</option>
                         @foreach (var disciplina in Model.Disciplinas)
                         {
                                 <option value="@disciplina.Value">@disciplina.Text</option>
@@ -50,7 +50,7 @@
                 <div class="form-group">
                     <label for="professorSelect">Selecione o Professor:</label>
                     <select id="professorSelect" asp-for="Filtros.ProfessorId" class="form-control">
-                        <option value="">Todos os Professores</option>
+                        <option value="0">Todos os Professores</option>
                         @foreach (var professor in Model.Professores)
                         {
                                 <option value="@professor.Value">@professor.Text</option>
@@ -68,7 +68,6 @@
         </div>
     </form>
 
-    <!-- Tabela de relatórios -->
     <div id="grid" class="mt-4">
         <partial name="_RelatoriosPartial" model="@Model.Relatorios"  />
     </div>
@@ -77,26 +76,29 @@
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        $(document).ready(function() {
-            $('#gerarRelatorio').on('click', function() {
-                var formData = $('#relatorioForm').serialize();
+    $(document).ready(function() {
+        $('#gerarRelatorio').on('submit', function(event) {
+            event.preventDefault();  
 
-                $.ajax({
-                    url: '@Url.Page("Index", new { handler = "FiltrarRelatorios" })',
-                    type: 'GET',
-                    data: formData,
-                    success: function(response) {
-                        $('#grid').html(response);
-                    },
-                    error: function() {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Erro',
-                            text: 'Erro ao gerar o relatório.'
-                        });
-                    }
-                });
+            var form = $(this);
+            var url = form.attr('action') || '@Url.Page("Index", new { handler = "FiltrarRelatorios" })';
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: form.serialize(), 
+                success: function(response) {
+                    $('#grid').html(response);  
+                },
+                error: function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erro',
+                        text: 'Erro ao gerar o relatório.'
+                    });
+                }
             });
         });
-    </script>
+    });
+</script>
 }

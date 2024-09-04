@@ -14,6 +14,11 @@
             <div class="col-md-6">
                 <label>Aluno:</label>
                 <select name="AlunoID" id="alunoSelect" class="form-control">
+                    @if (Model.Alunos.Count() == 0)
+                    {
+                        <option value="0">Não há alunos</option>
+                    }
+
                     @foreach (var aluno in Model.Alunos)
                     {
                         <option value="@aluno.Value">@aluno.Text</option>

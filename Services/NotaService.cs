@@ -12,7 +12,7 @@ namespace ELLPScore
         bool AtualizarNota(Nota nota, out string erro);
         bool ExcluirNota(int id, out string erro);
         IEnumerable<Nota> GetNotasByAlunoId(int alunoId);
-        IEnumerable<Nota> GetNotasByTurma(int turmaId);
+        IEnumerable<Nota> GetNotasByPeriodo(int turmaId);
         Task<int> GetTotalNotasAsync();
     }
 
@@ -39,12 +39,11 @@ namespace ELLPScore
         }
 
         // Retorna as notas de uma turma específica
-        public IEnumerable<Nota> GetNotasByTurma(int turmaId)
+        public IEnumerable<Nota> GetNotasByPeriodo(int alunoId)
         {
             return _context.Notas
                 .Include(n => n.Aluno) 
-                .Include(n => n.Turma)
-                .Where(n => n.TurmaID == turmaId)
+                .Where(n => n.AlunoID == alunoId)
                 .ToList();
         }
 

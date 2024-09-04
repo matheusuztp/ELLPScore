@@ -21,7 +21,19 @@
                     <td>@item.Serie</td>
                     <td>@item.NomeAluno</td>
                     <td>@item.Disciplina</td>
-                    <td>@item.Periodo</td>
+                    <td>
+                        @{
+                            if (Enum.TryParse(typeof(Periodos), item.Periodo, out var periodoEnum))
+                            {
+                                var periodoDisplayName = ((Periodos)periodoEnum).GetDisplayName();
+                                @periodoDisplayName
+                            }
+                            else
+                            {
+                                @item.Periodo
+                            }
+                        }
+                    </td>
                     <td>@item.Nota</td>
                 </tr>
             }
