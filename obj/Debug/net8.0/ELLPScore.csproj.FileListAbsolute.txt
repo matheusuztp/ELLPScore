@@ -401,6 +401,18 @@ C:\ELLPScore\ELLPScore\obj\Debug\net8.0\refint\ELLPScore.dll
 C:\ELLPScore\ELLPScore\obj\Debug\net8.0\ELLPScore.pdb
 C:\ELLPScore\ELLPScore\obj\Debug\net8.0\ELLPScore.genruntimeconfig.cache
 C:\ELLPScore\ELLPScore\obj\Debug\net8.0\ref\ELLPScore.dll
+C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.csproj.AssemblyReference.cache
+C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.Resources.SharedResource.pt-BR.resources
+C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.csproj.GenerateResource.cache
+C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.AssemblyInfoInputs.cache
+C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.AssemblyInfo.cs
+C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.csproj.CoreCompileInputs.cache
+C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.RazorAssemblyInfo.cache
+C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.RazorAssemblyInfo.cs
+C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.sourcelink.json
 C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\bin\Debug\net8.0\appsettings.json
 C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\bin\Debug\net8.0\ELLPScore.staticwebassets.runtime.json
@@ -638,18 +650,6 @@ C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\bin\Debug\net8.0\runtimes\wi
 C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
-C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.csproj.AssemblyReference.cache
-C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.Resources.SharedResource.pt-BR.resources
-C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.csproj.GenerateResource.cache
-C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.AssemblyInfoInputs.cache
-C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.AssemblyInfo.cs
-C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.csproj.CoreCompileInputs.cache
-C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.RazorAssemblyInfo.cache
-C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.RazorAssemblyInfo.cs
-C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\ELLPScore.sourcelink.json
 C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\pt-BR\ELLPScore.resources.dll
 C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\mathe\OneDrive\Área de Trabalho\ELLPScore\obj\Debug\net8.0\staticwebassets.development.json

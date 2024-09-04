@@ -11,6 +11,8 @@ namespace ELLPScore.Services
         bool CadastrarNota(Nota nota, out string erro);
         bool AtualizarNota(Nota nota, out string erro);
         bool ExcluirNota(int id, out string erro);
+        IEnumerable<Nota> GetNotasByAlunoId(int alunoId);
+        IEnumerable<Nota> GetNotasByTurma(int turmaId);
     }
 
     public class NotaService : INotaService
@@ -20,6 +22,25 @@ namespace ELLPScore.Services
         public NotaService(ELLPScoreDBContext context)
         {
             _context = context;
+        }
+
+        public IEnumerable<Nota> GetNotasByAlunoId(int alunoId)
+        {
+            return _context.Notas
+                .Include(n => n.Aluno)
+                .Include(n => n.Disciplina)
+                .Where(n => n.AlunoID == alunoId)
+                .ToList();
+        }
+
+        // Retorna as notas de uma turma específica
+        public IEnumerable<Nota> GetNotasByTurma(int turmaId)
+        {
+            return _context.Notas
+                .Include(n => n.Aluno) 
+                .Include(n => n.Turma)
+                .Where(n => n.TurmaID == turmaId)
+                .ToList();
         }
 
         public IList<Nota> GetAllNotas(int id = 0)
@@ -57,12 +78,11 @@ namespace ELLPScore.Services
             {
                 var jaExiste = _context.Notas.Any(n => n.AlunoID == nota.AlunoID
                                                     && n.DisciplinaID == nota.DisciplinaID
-                                                    && n.Periodo == nota.Periodo
-                                                    && n.NotaValor == nota.NotaValor);
+                                                    && n.Periodo == nota.Periodo);
 
                 if(jaExiste)
                 {
-                    erro = "Nota já cadastrada.";
+                    erro = "Nota já cadastrada nesta disciplina e periodo.";
                     return false;
                 }
 

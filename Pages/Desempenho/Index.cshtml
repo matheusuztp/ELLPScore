@@ -1,0 +1,128 @@
+﻿@page
+@model Desempenho.IndexModel
+@{
+    ViewData["Title"] = "Verificar Desempenho";
+    Layout = "~/Pages/Shared/_LayoutLogado.cshtml";
+}
+
+<div class="container mt-4">
+    <h2>Verificar Desempenho</h2>
+
+    <!-- Combo box para selecionar o aluno -->
+    <div class="form-group">
+        <label for="alunoSelect">Selecione o Aluno:</label>
+        <select id="alunoSelect" class="form-control">
+            @foreach (var aluno in Model.Alunos)
+            {
+                <option value="@aluno.Value">@aluno.Text</option>
+            }
+        </select>
+    </div>
+
+    <div id="grid">
+        <partial name="_DesempenhoPartial" model="@Model.DesempenhoDataModel" />
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function renderCharts() {
+            debugger;
+
+            // Verificar se os gráficos já existem antes de tentar destruí-los
+            if (window.graficoDesempenhoMateria && typeof window.graficoDesempenhoMateria.destroy === 'function') {
+                window.graficoDesempenhoMateria.destroy();
+            }
+            if (window.graficoAlunosNotas && typeof window.graficoAlunosNotas.destroy === 'function') {
+                window.graficoAlunosNotas.destroy();
+            }
+            if (window.graficoAprovacoes && typeof window.graficoAprovacoes.destroy === 'function') {
+                window.graficoAprovacoes.destroy();
+            }
+
+            // Recriar os gráficos se os elementos existirem no DOM
+            if (document.getElementById('graficoDesempenhoMateria')) {
+                var ctxMateria = document.getElementById('graficoDesempenhoMateria').getContext('2d');
+                var desempenhoMateriaData = {
+                    labels: @Html.Raw(Json.Serialize(Model.DesempenhoDataModel.DesempenhoPorDisciplina.Select(d => d.Disciplina))),
+                    datasets: [{
+                        label: 'Nota',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                        data: @Html.Raw(Json.Serialize(Model.DesempenhoDataModel.DesempenhoPorDisciplina.Select(d => d.Nota)))
+                            }]
+                };
+
+                window.graficoDesempenhoMateria = new Chart(ctxMateria, {
+                    type: 'bar',
+                    data: desempenhoMateriaData
+                });
+            }
+
+            if (document.getElementById('graficoAlunosNotas')) {
+                var ctxAlunosNotas = document.getElementById('graficoAlunosNotas').getContext('2d');
+                var alunosVsNotasData = {
+                    labels: @Html.Raw(Json.Serialize(Model.DesempenhoDataModel.AlunosVsNotas.Select(d => d.Aluno))),
+                    datasets: [{
+                        label: 'Nota',
+                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                        borderColor: 'rgba(153, 102, 255, 1)',
+                        borderWidth: 1,
+                        data: @Html.Raw(Json.Serialize(Model.DesempenhoDataModel.AlunosVsNotas.Select(d => d.Nota)))
+                            }]
+                };
+
+                window.graficoAlunosNotas = new Chart(ctxAlunosNotas, {
+                    type: 'bar',
+                    data: alunosVsNotasData
+                });
+            }
+
+            if (document.getElementById('graficoAprovacoes')) {
+                var ctxAprovacoes = document.getElementById('graficoAprovacoes').getContext('2d');
+                var aprovacoesData = {
+                    labels: @Html.Raw(Json.Serialize(Model.DesempenhoDataModel.Aprovacoes.Select(d => d.Periodo))),
+                    datasets: [{
+                        label: 'Aprovados',
+                        backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                        borderColor: 'rgba(255, 159, 64, 1)',
+                        borderWidth: 1,
+                        data: @Html.Raw(Json.Serialize(Model.DesempenhoDataModel.Aprovacoes.Select(d => d.Aprovado)))
+                            }]
+                };
+
+                window.graficoAprovacoes = new Chart(ctxAprovacoes, {
+                    type: 'line',
+                    data: aprovacoesData
+                });
+            }
+        }
+
+        $(document).ready(function () {
+            renderCharts();
+            
+            $('#alunoSelect').on('change', function () {
+                var alunoId = $(this).val();
+
+                $.ajax({
+                    url: '@Url.Page("Index", new { handler = "DesempenhoPorAluno" })',
+                    type: 'GET',
+                    data: { alunoId: alunoId },
+                    success: function () {
+                        renderCharts();
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Erro',
+                            text: 'Erro ao carregar os gráficos.'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

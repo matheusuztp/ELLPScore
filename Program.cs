@@ -1,3 +1,4 @@
+using ELLPScore;
 using ELLPScore.Context.DB;
 using ELLPScore.Domain;
 using ELLPScore.Services;
@@ -51,6 +52,8 @@ builder.Services.AddTransient<IDisciplinaService, DisciplinaService>();
 builder.Services.AddTransient<IProfessorService, ProfessorService>();
 builder.Services.AddTransient<INotaService, NotaService>();
 builder.Services.AddTransient<IFeedbackService, FeedbackService>();
+builder.Services.AddTransient<IDesempenhoService, DesempenhoService>();
+
 
 var app = builder.Build();
 
